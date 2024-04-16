@@ -1,13 +1,20 @@
-# Stage 1: Build the application
-FROM node:20.9.0-alpine as build
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm install
-COPY . ./
-RUN npm run build
+# Stage 1: Set up the development environment
+FROM node:20.9.0-alpine
 
-# Stage 2: Serve the app with nginx
-FROM nginx:alpine
-COPY --from=build /app/dist/frontend/browser /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Set the working directory
+WORKDIR /app
+
+# Copy the package.json and package-lock.json
+COPY package.json package-lock.json ./
+
+# Install Angular CLI globally and project dependencies
+RUN npm install -g @angular/cli && npm install
+
+# Copy the project files into the docker container
+COPY . .
+
+# Expose the port the app runs on
+EXPOSE 4200
+
+# Start the application
+CMD ["ng", "serve", "--host", "0.0.0.0", "--poll", "200"]
