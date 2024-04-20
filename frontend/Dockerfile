@@ -9,6 +9,7 @@ COPY package.json package-lock.json ./
 
 # Install Angular CLI globally and project dependencies
 RUN npm install -g @angular/cli && npm install
+#RUN ng add @angular/material17.3.5
 
 # Copy the project files into the docker container
 COPY . .
