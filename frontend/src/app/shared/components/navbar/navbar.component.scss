@@ -1,0 +1,36 @@
+mat-toolbar {
+    position: sticky;
+    height: 70px;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.8); 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); 
+
+    .mat-toolbar-row {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+
+    .spacer {
+        flex: 1 1 auto;
+    }
+    
+    .logo {
+        height: 70%;
+        filter: brightness(0) invert(1); 
+    }
+  
+    a {
+        color: white;
+        text-decoration: none;
+        margin: 0 10px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    
+    .activebutton {
+        color: #DCC131;
+    }
+}

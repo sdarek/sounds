@@ -1,0 +1,33 @@
+.portfolio-page {
+    background-color: #333;  // Ciemnoszare tło
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+    .content-wrapper {
+      background-color: #424242;  // Jaśniejszy prostokąt na środku
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  
+      .portfolio-item {
+        background-color: #525252;  // Kolor prostokątów z pracami
+        margin: 10px;
+        padding: 15px;
+        border-radius: 5px;
+        color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  
+        h3 {
+          margin: 0 0 10px 0;
+        }
+  
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+  

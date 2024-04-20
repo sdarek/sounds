@@ -1,0 +1,81 @@
+.full-screen-background {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/assets/images/home-background.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(0px);
+    z-index: -1;
+  }
+
+  .hero-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    z-index: 1;
+
+    .large-logo {
+      max-height: 30vh;
+    }
+
+    .hero-text {
+      position: relative;
+      width: 100vw;  // Zapewnia, że element rozciąga się na całą szerokość widoku
+      text-align: center;
+      color: white;
+      z-index: 2;
+      margin: 2em 0 1.5em;
+      padding: 40px 0;  // Dodaje padding wokół tekstu dla lepszego efektu gradientu
+      background: linear-gradient(
+        to bottom, 
+        rgba(0, 0, 0, 0) 0%, 
+        rgba(0, 0, 0, 0.65) 20%, 
+        rgba(0, 0, 0, 0.65) 80%, 
+        rgba(0, 0, 0, 0) 100%
+      );
+    
+      h1 {
+        font-size: 2.5em;
+        margin: 0;
+        letter-spacing: 0.3em;
+        font-weight: bold;
+      }
+    }
+    
+    
+    .btn-portfolio {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px; // Określona szerokość przycisku
+      height: 60px; // Określona wysokość przycisku
+      background-color: #9e7a2c;
+      color: white;
+      border: none;
+      font-size: 1.2em; // Większa czcionka
+      border-radius: 5px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); // Cień zwiększony dla większego kontrastu
+      transition: background-color 0.3s ease;
+      cursor: pointer; // Dodanie wskaźnika kliknięcia
+    }
+
+    .btn-portfolio:hover {
+      background-color: #d4a73d;
+    }
+  }
+}

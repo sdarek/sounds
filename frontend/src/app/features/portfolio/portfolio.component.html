@@ -1,0 +1,10 @@
+<div class="portfolio-page">
+    <app-navbar></app-navbar>
+    <div class="content-wrapper">
+      <div class="portfolio-item" *ngFor="let item of portfolioItems">
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.description }}</p>
+      </div>
+    </div>
+</div>
+  
