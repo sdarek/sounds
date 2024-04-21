@@ -1,10 +1,19 @@
-<div class="portfolio-page">
-    <app-navbar></app-navbar>
-    <div class="content-wrapper">
-      <div class="portfolio-item" *ngFor="let item of portfolioItems">
-        <h3>{{ item.title }}</h3>
-        <p>{{ item.description }}</p>
+<div class="portfolio-page page">
+  <div class="container">
+    <h2 class="portfolio-header">PORTFOLIO</h2> <!-- Tytuł kontenera -->
+    <div class="portfolio-item" *ngFor="let item of portfolioItems; let i = index">
+      <div [class]="i % 2 === 0 ? 'content left' : 'content right'">
+        <div class="text-content">
+          <h3 class="portfolio-title">{{ item.title }}</h3>
+          <p class="portfolio-description">{{ item.description }}</p>
+        </div>
+        <div class="portfolio-video">
+          <video controls>
+            <source src="{{ item.videoUrl }}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
       </div>
     </div>
+  </div>
 </div>
-  

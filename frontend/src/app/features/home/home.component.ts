@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from '../../shared/components/navbar/navbar.component'; 
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 
@@ -8,7 +7,6 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [
     MatButtonModule,
-    NavbarComponent,
     RouterModule
   ],
   templateUrl: './home.component.html',

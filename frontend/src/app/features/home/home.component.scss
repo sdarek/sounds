@@ -1,25 +1,9 @@
+@import '../../../styles/variables';
+
 .full-screen-background {
-  position: relative;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('/assets/images/home-background.jpg');
-    background-size: cover;
-    background-position: center;
-    filter: blur(0px);
-    z-index: -1;
-  }
-
+  background-image: url('/assets/images/home-background.jpg');
+  background-size: cover;
+  background-position: center;
   .hero-content {
     position: relative;
     display: flex;
@@ -35,12 +19,12 @@
 
     .hero-text {
       position: relative;
-      width: 100vw;  // Zapewnia, że element rozciąga się na całą szerokość widoku
+      width: 100vw;  
       text-align: center;
       color: white;
       z-index: 2;
       margin: 2em 0 1.5em;
-      padding: 40px 0;  // Dodaje padding wokół tekstu dla lepszego efektu gradientu
+      padding: 40px 0; 
       background: linear-gradient(
         to bottom, 
         rgba(0, 0, 0, 0) 0%, 
@@ -58,24 +42,24 @@
     }
     
     
-    .btn-portfolio {
+    .btn-login {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 200px; // Określona szerokość przycisku
-      height: 60px; // Określona wysokość przycisku
-      background-color: #9e7a2c;
+      width: 200px; 
+      height: 60px; 
+      background-color: $third-color;
       color: white;
       border: none;
-      font-size: 1.2em; // Większa czcionka
+      font-size: 1.2em; 
       border-radius: 5px;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); // Cień zwiększony dla większego kontrastu
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
       transition: background-color 0.3s ease;
       cursor: pointer; // Dodanie wskaźnika kliknięcia
     }
 
-    .btn-portfolio:hover {
-      background-color: #d4a73d;
+    .btn-login:hover {
+      background-color: #8c7a0a;
     }
   }
 }

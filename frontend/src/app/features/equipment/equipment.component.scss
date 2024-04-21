@@ -1,0 +1,68 @@
+@import '../../../styles/styles'; // Importuje globalne style i zmienne
+
+.equipment-page .container {
+    justify-content: flex-start;
+
+    .equipment-header {
+        position: sticky;
+        top: 0;
+        background-color: $secondary-color;
+        z-index: 1000;
+        width: 100%;
+        padding: 20px 20px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        font-size: 2em;
+        color: white;
+        font-weight: bold;
+        letter-spacing: 1rem;
+    }
+
+    .equipment-item {
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        margin: 10px 0;
+        width: 100%;
+        color: white;
+
+        .content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            &.left {
+                flex-direction: row-reverse;
+            }
+
+            .text-content {
+                width: 50%;
+                padding: 10px;
+            }
+
+            .equipment-image {
+                width: 50%;
+                img {
+                    width: 100%;
+                    height: auto;
+                    border-radius: 4px;  // Optional: rounded corners for images
+                }
+            }
+        }
+
+        .equipment-title {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .equipment-description {
+            font-size: 1rem;
+            color: #ccc;
+            padding: 20px;
+        }
+    }
+}

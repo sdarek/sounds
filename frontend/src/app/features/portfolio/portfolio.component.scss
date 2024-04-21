@@ -1,31 +1,73 @@
+@import '../../../styles/variables';
 .portfolio-page {
-    background-color: #333;  // Ciemnoszare tło
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  
-    .content-wrapper {
-      background-color: #424242;  // Jaśniejszy prostokąt na środku
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  
-      .portfolio-item {
-        background-color: #525252;  // Kolor prostokątów z pracami
-        margin: 10px;
+    .container {
+      justify-content: flex-start; 
+
+      .portfolio-header {
+          position: sticky;
+          top: 0;
+          background-color: $secondary-color;
+          z-index: 1000;
+          width: 100%;
+          padding: 20px 20px;
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+          text-align: center;
+          font-size: 2em;
+          color: white;
+          font-weight: bold;
+          letter-spacing: 1rem;
+      }
+
+
+      .portfolio-item { 
+        display: flex;
+        flex-direction: column;
         padding: 15px;
-        border-radius: 5px;
+        margin: 10px 0;
+        width: 100%;
+        background-color: #555;  
+        border: 1px solid #ccc; // subtelne obramowanie
+        border-radius: 8px;
         color: white;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  
-        h3 {
-          margin: 0 0 10px 0;
+
+        .content {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        
+          &.left {
+            flex-direction: row-reverse;  // Odwrócenie kolejności dla naprzemiennego układu
+          }
+        
+          .text-content {
+            width: 50%;
+            padding: 10px;
+          }
+        
+          .portfolio-video {
+            width: 50%;
+            video {
+              width: 100%;  // Rozciągnięcie wideo do pełnej dostępnej szerokości
+              height: auto;
+            }
+          }
         }
   
-        p {
-          margin: 0;
+        
+        .portfolio-title {
+          font-size: 1.5rem;
+          color: white;
+          margin-bottom: 10px;
+          text-align: center;
+        }
+
+        .portfolio-description {
+          font-size: 1rem;
+          color: #ccc;
+          padding: 20px;
         }
       }
     }

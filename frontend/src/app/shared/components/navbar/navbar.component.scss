@@ -1,9 +1,14 @@
+@import '../../../../styles/variables';
+
 mat-toolbar {
-    position: sticky;
-    height: 70px;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100vw;
-    background-color: rgba(0, 0, 0, 0.8); 
     box-shadow: 0 2px 4px rgba(0,0,0,0.5); 
+    z-index: 100000;
+    height: $menu-height;
+    background-color: $menu-background; 
 
     .mat-toolbar-row {
         display: flex;
@@ -30,7 +35,7 @@ mat-toolbar {
         align-items: center;
     }
     
-    .activebutton {
-        color: #DCC131;
+    .active {
+        color: $third-color;
     }
 }
