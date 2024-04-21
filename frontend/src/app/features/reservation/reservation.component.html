@@ -1,1 +1,27 @@
-<p>reservation works!</p>
+<div class="reservation-page page">
+  <div class="container">
+    <h2 class="reservation-header header">ZAREZERWUJ</h2>
+    
+    <div class="content-wrapper">
+      <div class="left-panel">
+        <mat-form-field appearance="fill" class="reservation-type-field">
+          <mat-label>Wybierz typ rezerwacji</mat-label>
+          <mat-select [(value)]="selectedReservationType">
+            <mat-option *ngFor="let item of reservationItems" [value]="item">
+              {{ item.title }} ({{ item.duration }})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <button mat-raised-button color="primary" (click)="onReserve()">Rezerwuj</button>
+      </div>
+
+      <div class="right-panel">
+        <mat-card>
+          <mat-calendar [(selected)]="selectedDate" (selectedChange)="onDateSelect($event)"></mat-calendar>
+
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -34,6 +34,7 @@ body {
     scrollbar-color: #555 #f0f0f0; // Styl dla Firefox, kciuk i tor przewijania
     height: 80vh;
     margin-top: $menu-height;
+    justify-content: flex-start;
 
     &::-webkit-scrollbar {
         width: 8px;

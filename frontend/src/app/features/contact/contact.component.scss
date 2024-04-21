@@ -1,0 +1,35 @@
+@import '../../../styles/variables';
+
+.contact-page {
+  .container {
+    display: flex;
+    flex-direction: row; 
+    align-items: stretch; 
+    justify-content: space-between; 
+
+    .left-panel, .right-panel {
+      flex: 1;  // Oba panele zajmują równą przestrzeń
+      padding: 20px;
+
+      h2 {
+        text-align: center;
+        color: white;
+      }
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+
+      mat-form-field {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      button {
+        margin-top: 20px;
+        background-color: $third-color;
+      }
+    }
+  }
+}
