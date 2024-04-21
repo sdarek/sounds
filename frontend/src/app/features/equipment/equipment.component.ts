@@ -17,9 +17,9 @@ import { MatDividerModule } from '@angular/material/divider';
 })
 export class EquipmentComponent {
   equipmentItems = [
-    { title: 'Camera', description: 'High quality camera for photography.', imageUrl: 'path/to/camera.jpg' },
-    { title: 'Microphone', description: 'Studio recording microphone.', imageUrl: 'path/to/microphone.jpg' },
-    { title: 'Microphone', description: 'Studio recording microphone.', imageUrl: 'path/to/microphone.jpg' },
-    { title: 'Microphone', description: 'Studio recording microphone.', imageUrl: 'path/to/microphone.jpg' },
+    { title: 'Camera', description: 'High quality camera for photography.', imageUrl: '../../assets/images/equip1.jpg' },
+    { title: 'Microphone', description: 'Studio recording microphone.', imageUrl: '../../assets/images/equip1.jpg' },
+    { title: 'Microphone', description: 'Studio recording microphone.', imageUrl: '../../assets/images/equip1.jpg' },
+    { title: 'Microphone', description: 'Studio recording microphone.', imageUrl: '../../assets/images/equip1.jpg' },
   ];
 }

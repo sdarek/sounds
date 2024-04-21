@@ -1,1 +1,11 @@
-<p>offer works!</p>
+<div class="offer-page page">
+    <div class="container">
+      <h2 class="offer-header header">OFERTA</h2>
+      <div class="offer-item" *ngFor="let item of offerItems; let i = index">
+        <div class="content">
+            <h3 class="offer-title">{{ item.title }}</h3>
+            <p class="offer-description">{{ item.description }}</p>
+        </div>
+      </div>
+    </div>
+</div>
