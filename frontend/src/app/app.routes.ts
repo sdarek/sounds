@@ -6,6 +6,7 @@ import { OfferComponent } from './features/offer/offer.component';
 import { ContactComponent } from './features/contact/contact.component';
 import { ReservationComponent } from './features/reservation/reservation.component';
 import { LoginComponent } from './features/login/login.component';
+import { RegisterComponent } from './features/register/register.component';
 import { PageNotFoundComponent } from './features/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
@@ -17,6 +18,7 @@ export const routes: Routes = [
     { path: 'contact', component: ContactComponent },
     { path: 'reservation', component: ReservationComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
     { path: '**', component: PageNotFoundComponent },
 
     // Dodatkowe trasy dla submodułów dashboardu mogą być zagnieżdżone tutaj

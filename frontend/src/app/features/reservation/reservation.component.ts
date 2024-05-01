@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,6 +22,7 @@ interface ReservationOption {
   standalone: true,
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -33,14 +34,26 @@ interface ReservationOption {
   ]
 })
 export class ReservationComponent implements OnInit {
+  reservationForm: FormGroup;
+
   reservationItems: ReservationOption[] = [
     { title: 'Nagranie muzyczne', duration: '1h' },
     { title: 'Nagranie lektorskie', duration: '1h' },
     { title: 'Sesja fotograficzna', duration: '2h' }
   ];
-  
   selectedReservationType?: ReservationOption;
   selectedDate: Date | null = null;
+
+  constructor() {
+    this.reservationForm = new FormGroup({
+      fullName: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      phone: new FormControl('', [Validators.required]),
+      note: new FormControl(''),
+      reservationType: new FormControl(null, [Validators.required]),
+      reservationDate: new FormControl(new Date(), [Validators.required])
+    });
+  }
 
   ngOnInit(): void {}
   onDateSelect(event: Date): void {
@@ -50,7 +63,11 @@ export class ReservationComponent implements OnInit {
   
 
   onReserve(): void {
-    console.log('Zarezerwowano:', this.selectedReservationType, 'na datę:', this.selectedDate);
-    // Implement further logic to handle the reservation
+    if (this.reservationForm.valid) {
+      console.log('Form Data:', this.reservationForm.value);
+      // Implement further logic to handle the reservation
+    } else {
+      console.log('Form is not valid!');
+    }
   }
 }
