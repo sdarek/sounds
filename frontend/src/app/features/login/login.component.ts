@@ -8,7 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
-import { MatError } from '@angular/material/form-field'; 
+
+import { AuthService } from "../../core/services/auth/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -24,8 +25,7 @@ import { MatError } from '@angular/material/form-field';
     MatButtonModule,
     MatSelectModule,
     MatOptionModule,
-    MatCardModule,
-    MatError
+    MatCardModule
   ]
 })
 export class LoginComponent {
@@ -34,18 +34,32 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required])
   });
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   onLogin(): void {
     if (this.loginForm.valid) {
-      console.log('Login Data:', this.loginForm.value);
-      // Tutaj można dodać logikę autentykacji
-    } else {
-      console.log('Form is not valid');
+      const email = this.loginForm.value.email;
+      const password = this.loginForm.value.password;
+
+      if (email && password) {
+        this.authService.login(email, password).subscribe(
+          data => {
+            console.log('Login successful', data);
+            // Redirect to home or dashboard etc.
+          },
+          error => {
+            console.log('Login failed', error);
+          }
+        );
+      } else {
+        console.log('Email or password is missing');
+      }
     }
   }
 
   async loginWithGoogle() {
-
+    // Logika do logowania przez Google
+    console.log('Login with Google initiated');
+    // Tutaj możesz dodać implementację używając np. AngularFireAuth
   }
 }

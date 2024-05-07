@@ -1,3 +1,4 @@
+/*auth.routes.ts*/
 import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
 import { PortfolioComponent } from './features/portfolio/portfolio.component';
@@ -9,6 +10,8 @@ import { LoginComponent } from './features/login/login.component';
 import { RegisterComponent } from './features/register/register.component';
 import { PageNotFoundComponent } from './features/page-not-found/page-not-found.component';
 
+import { AuthGuard } from "./core/guards/auth/auth.guard";
+
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
@@ -19,8 +22,13 @@ export const routes: Routes = [
     { path: 'reservation', component: ReservationComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: '**', component: PageNotFoundComponent },
 
-    // Dodatkowe trasy dla submodułów dashboardu mogą być zagnieżdżone tutaj
+    {
+      path: 'dashboard',
+      loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
+      canActivate: [AuthGuard]
+    },
+
+    { path: '**', component: PageNotFoundComponent },
 
 ];
