@@ -1,1 +1,28 @@
-<p>recordings works!</p>
+<div class="recordings-page page">
+    <div class="container">
+        <div class="recordings-section">
+            <h1>NAGRANIA W TOKU</h1>
+            <div class="recordings-list">
+                <div class="recording-box" *ngFor="let recording of ongoingRecordings">
+                    <h2>{{recording.title}}</h2>
+                    <button mat-icon-button>
+                        <mat-icon>settings</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="recordings-section">
+            <h1>ZREALIZOWANE NAGRANIA</h1>
+            <div class="recordings-list">
+                <div class="recording-box" *ngFor="let recording of doneRecordings">
+                    <h2>{{recording.title}}</h2>
+                    <button mat-icon-button>
+                        <mat-icon>settings</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

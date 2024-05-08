@@ -31,6 +31,9 @@ interface Reservation {
 export class ReservationsComponent {
   reservations: Reservation[] = [
     { id: '1', type: 'Nagranie muzyczne', date: new Date(), time: '15:00', address: 'Warszawa, ul. Muzyczna 1', cost: 200 },
+    { id: '1', type: 'Nagranie muzyczne', date: new Date(), time: '15:00', address: 'Warszawa, ul. Muzyczna 1', cost: 200 },
+    { id: '1', type: 'Nagranie muzyczne', date: new Date(), time: '15:00', address: 'Warszawa, ul. Muzyczna 1', cost: 200 },
+    { id: '1', type: 'Nagranie muzyczne', date: new Date(), time: '15:00', address: 'Warszawa, ul. Muzyczna 1', cost: 200 },
   ];
 
   constructor(private router: Router) {}

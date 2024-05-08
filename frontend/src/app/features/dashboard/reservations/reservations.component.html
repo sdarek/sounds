@@ -5,18 +5,16 @@
       <div class="reservations-list">
         <div class="reservation-item" *ngFor="let reservation of reservations">
           <div class="reservation-details">
-            <h3>{{ reservation.type }}</h3>
+            <h2>{{ reservation.type }}</h2>
             <p>Data: {{ reservation.date | date:'mediumDate' }}</p>
             <p>Godzina: {{ reservation.time }}</p>
             <p>Adres: {{ reservation.address }}</p>
             <p>Koszt: {{ reservation.cost | currency:'PLN' }}</p>
           </div>
           <div class="reservation-actions">
-            <img src="assets/logo.png" alt="Logo" class="reservation-logo">
-            <button mat-icon-button (click)="editReservation(reservation.id)">
-              <mat-icon>edit</mat-icon>
-            </button>
-          </div>
+            <img src="../../../../assets/images/logo.png" alt="Logo" class="reservation-logo">
+            <button mat-raised-button color="primary" class="btn-edit" (click)="editReservation(reservation.id)">Edytuj rezerwację</button>
+          </div> 
         </div>
       </div>
     </div>
