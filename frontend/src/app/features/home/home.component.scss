@@ -19,20 +19,20 @@
 
     .hero-text {
       position: relative;
-      width: 100vw;  
+      width: 100vw;
       text-align: center;
       color: white;
       z-index: 2;
       margin: 2em 0 1.5em;
-      padding: 40px 0; 
+      padding: 40px 0;
       background: linear-gradient(
-        to bottom, 
-        rgba(0, 0, 0, 0) 0%, 
-        rgba(0, 0, 0, 0.65) 20%, 
-        rgba(0, 0, 0, 0.65) 80%, 
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.65) 20%,
+        rgba(0, 0, 0, 0.65) 80%,
         rgba(0, 0, 0, 0) 100%
       );
-    
+
       h1 {
         font-size: 2.5em;
         margin: 0;
@@ -40,18 +40,18 @@
         font-weight: bold;
       }
     }
-    
-    
+
+
     .btn-login {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 200px; 
-      height: 60px; 
+      width: 200px;
+      height: 60px;
       background-color: $third-color;
       color: white;
       border: none;
-      font-size: 1.2em; 
+      font-size: 1.2em;
       border-radius: 5px;
       box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
       transition: background-color 0.3s ease;
@@ -59,7 +59,7 @@
     }
 
     .btn-login:hover {
-      background-color: #8c7a0a;
+      background-color: darken($third-color, 5%);
     }
   }
 }

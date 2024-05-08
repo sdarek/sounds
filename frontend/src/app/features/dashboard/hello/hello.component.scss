@@ -1,0 +1,39 @@
+@import '../../../../styles/variables';
+
+.hello-page {
+  .container {
+    max-width: 400px;
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      text-align: justify;
+
+      .welcome-text {
+        font-size: 1.3em;
+        padding: 20px;
+        font-weight: 300;
+        letter-spacing: 0.05em;
+        opacity: 0.9;
+      }
+
+      .btn-reserve {
+        width: 160px;
+        height: 50px;
+        background-color: $third-color;
+        color: white;
+        border: none;
+        font-size: 1.1em;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+          background-color: darken($third-color, 5%);
+        }
+      }
+    }
+  }
+}

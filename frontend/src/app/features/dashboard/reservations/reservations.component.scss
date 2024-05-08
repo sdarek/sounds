@@ -1,0 +1,65 @@
+@import '../../../../styles/variables';
+
+.reservations-page {
+  .container {
+    .content {
+
+      .btn-reserve {
+        width: 200px;
+        height: 60px;
+        background-color: $third-color;
+        color: white;
+        border: none;
+        font-size: 1.1em;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+          background-color: darken($third-color, 5%);
+        }
+      }
+
+      .reservations-list {
+        display: flex;
+        flex-direction: column;
+
+        .reservation-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 15px;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+
+          .reservation-details {
+            h3 {
+              margin: 0 0 5px 0;
+            }
+            p {
+              margin: 5px 0;
+              font-size: 0.9em;
+            }
+          }
+
+          .reservation-actions {
+            display: flex;
+            align-items: center;
+
+            .reservation-logo {
+              width: 50px;
+              height: 50px;
+              margin-right: 10px;
+            }
+
+            button {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

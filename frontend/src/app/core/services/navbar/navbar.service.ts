@@ -32,11 +32,11 @@ export class NavbarService {
 
   setDashboardLinks(): void {
     const dashboardLinks: NavLink[] = [
-      { label: 'Strona główna', path: '/home' },
+      { label: 'Dashboard', path: '/dashboard/hello' },
       { label: 'Twoje nagrania', path: '/dashboard/recordings' },
       { label: 'Twoje rezerwacje', path: '/dashboard/reservations' },
       { label: 'Konto', path: '/dashboard/account' },
-      { label: 'Wyloguj', path: '/logout' } // Zakładając, że dodasz funkcjonalność wylogowania
+      { label: 'Wyloguj', path: '/home' } // Zakładając, że dodasz funkcjonalność wylogowania
     ];
     this.navLinks.next(dashboardLinks);
   }

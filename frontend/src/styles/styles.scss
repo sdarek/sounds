@@ -1,9 +1,9 @@
-@import 'variables';
+@import './variables';
 
 html, body { height: 100%; }
-body { 
-    margin: 0; 
-    font-family: $font-stack; 
+body {
+    margin: 0;
+    font-family: $font-stack;
     font-size: $font-size;
 }
 
@@ -27,8 +27,8 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     width: 80vw;
-    max-width: 1200px; 
-    overflow-y: auto; 
+    max-width: 1200px;
+    overflow-y: auto;
     overflow-x: hidden;
     scrollbar-width: thin; // Styl dla Firefox
     scrollbar-color: #555 #f0f0f0; // Styl dla Firefox, kciuk i tor przewijania
