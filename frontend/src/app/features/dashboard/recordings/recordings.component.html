@@ -1,26 +1,50 @@
 <div class="recordings-page page">
     <div class="container">
+
+
         <div class="recordings-section">
             <h1>NAGRANIA W TOKU</h1>
             <div class="recordings-list">
-                <div class="recording-box" *ngFor="let recording of ongoingRecordings">
-                    <h2>{{recording.title}}</h2>
-                    <button mat-icon-button>
-                        <mat-icon>settings</mat-icon>
-                    </button>
-                </div>
+                <swiper-container
+                    slides-per-view="2"
+                    speed="500"
+                    loop="false"
+                    css-mode="true"
+                    navigation="true"
+                    pagination="true"
+                    scrollbar="false">
+                    <swiper-slide *ngFor="let recording of ongoingRecordings">
+                        <div class="recording-box">
+                            <h2>{{recording.title}}</h2>
+                            <button mat-icon-button class="btn-recording">
+                                <mat-icon>settings</mat-icon>
+                            </button>
+                        </div>
+                    </swiper-slide>
+                </swiper-container>
             </div>
         </div>
 
         <div class="recordings-section">
             <h1>ZREALIZOWANE NAGRANIA</h1>
             <div class="recordings-list">
-                <div class="recording-box" *ngFor="let recording of doneRecordings">
-                    <h2>{{recording.title}}</h2>
-                    <button mat-icon-button>
-                        <mat-icon>settings</mat-icon>
-                    </button>
-                </div>
+                <swiper-container
+                    slides-per-view="3"
+                    speed="500"
+                    loop="false"
+                    css-mode="true"
+                    navigation="true"
+                    pagination="true"
+                    scrollbar="false">
+                    <swiper-slide *ngFor="let recording of doneRecordings">
+                        <div class="recording-box">
+                            <h2>{{recording.title}}</h2>
+                            <button mat-icon-button class="btn-recording">
+                                <mat-icon>settings</mat-icon>
+                            </button>
+                        </div>
+                    </swiper-slide>
+                </swiper-container>
             </div>
         </div>
     </div>

@@ -6,12 +6,12 @@
     .recordings-section {
         height: 50%;
         width: 100%;
-        margin: 10px 0;
 
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin-bottom: 20px;
         h1 {
             display: flex;
             text-align: center;
@@ -22,36 +22,51 @@
             letter-spacing: 0.2rem;
             color: darken($primary-color, 10%);
             height: 20%;
+            margin-top: 10px;
+            margin-bottom: 0;
         }
 
         .recordings-list {
-            width: 999px;
-            display: flex;
-            justify-content: center;
-            justify-items: flex-start;
-            overflow-x: auto; 
+            width: 80%;
             height: 80%;
+            overflow-x: hidden; 
+            overflow-y: hidden; 
             border-radius: 8px;
             background-color: $primary-color;
 
+            swiper-container {
+                height: 100%;
+                swiper-slide {
+                    display: flex;
+                    text-align: center;
+                    justify-content: center;
+                    align-items: center;
+                    .recording-box {
+                        margin: 0;
+                        height: 70%;
+                        width: 70%;
+                        text-align: center;
+                        background-color: $third-color;
+                        border-radius: 8px;
             
-            .recording-box {
-                flex: 0 0 30%;  // Każdy box zajmuje 30% przestrzeni kontenera, max 3 w widoku
-                min-width: 200px; // Minimalna szerokość boxa
-                margin: 20px;
-                padding: 10px;
-                text-align: center;
-                
-                border-radius: 8px;
-                background-color: yellow;
-    
-                h2 {
-                    padding: 20px;
-                }
-
-                button {
-                    mat-icon {
-
+                        h2 {
+                            display: flex;
+                            text-align: center;
+                            justify-content: center;
+                            align-items: center;
+                            text-transform: uppercase;
+                            margin-top: 5px;
+                            font-size: 1.5em;
+                            font-weight: 600;
+                            height: 3em;
+                            overflow: hidden;
+                        }
+        
+                        .btn-recording {
+                            mat-icon {
+        
+                            }
+                        }
                     }
                 }
             }
