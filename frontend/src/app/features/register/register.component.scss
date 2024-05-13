@@ -2,7 +2,7 @@
 
 .register-page {  
     .container {   
-        max-width: 400px;
+        max-width: 400px; 
 
         hr {
             width: 100%;
@@ -10,7 +10,7 @@
             border-top: 1px solid $third-color;
             margin: 20px 0;
         }
-        .login-link {
+        .registration-link {
             text-align: center;
             a {
                 color: $third-color;

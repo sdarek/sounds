@@ -2,7 +2,7 @@
     <div class="container">
         <h2 class="register-header header">REJESTRACJA</h2>
 
-        <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        <form [formGroup]="registerForm" (ngSubmit)="onRegister()"> 
             <mat-form-field appearance="fill">
               <mat-label>Imię</mat-label>
               <input matInput formControlName="firstName" placeholder="Wpisz swoje imię">
@@ -34,6 +34,12 @@
                 Hasła nie pasują do siebie.
                 </mat-error>
             </mat-form-field>
+
+            <div class="registration-link">
+              Masz już konto? <a routerLink="/login">Zaloguj się</a>
+            </div>
+            
+            <hr>
         
             <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">Zarejestruj się</button>
           </form>
