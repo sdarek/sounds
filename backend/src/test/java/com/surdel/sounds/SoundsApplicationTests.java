@@ -1,4 +1,4 @@
-package com.sounds;
+package com.surdel.sounds;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
