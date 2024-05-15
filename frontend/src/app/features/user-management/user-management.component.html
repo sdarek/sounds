@@ -1,0 +1,13 @@
+<div class="page">
+  <div class="container">
+    <div class="user-management">
+      <h2 class="header">User Management</h2>
+      <ul>
+        <li *ngFor="let user of users">
+          {{ user.firstName }} {{ user.lastName }} - {{ user.email }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+

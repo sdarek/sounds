@@ -11,6 +11,7 @@ import { RegisterComponent } from './features/register/register.component';
 import { PageNotFoundComponent } from './features/page-not-found/page-not-found.component';
 
 import { AuthGuard } from "./core/guards/auth/auth.guard";
+import {UserManagementComponent} from "./features/user-management/user-management.component";
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -22,6 +23,7 @@ export const routes: Routes = [
     { path: 'reservation', component: ReservationComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'user-management', component: UserManagementComponent },
 
     {
       path: 'dashboard',
@@ -29,6 +31,7 @@ export const routes: Routes = [
       //canActivate: [AuthGuard]
     },
 
-    { path: '**', component: PageNotFoundComponent },
+
+    // { path: '**', component: PageNotFoundComponent },
 
 ];

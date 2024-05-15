@@ -12,10 +12,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())  // Wyłącz CSRF na potrzeby testowania
+        http.csrf(csrf -> csrf.disable())  // Wyłącz CSRF na potrzeby testowania
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()  // Zezwól na dostęp do endpointów API i Swagger UI
+                        .requestMatchers("/api/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()  // Zezwól na dostęp do endpointów API i Swagger UI
                         .anyRequest().authenticated()
                 );
         return http.build();
