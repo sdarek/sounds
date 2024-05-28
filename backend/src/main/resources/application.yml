@@ -1,0 +1,7 @@
+application:
+  security:
+    jwt:
+      secret-key: VRE24s3jMp3yeka6QR23koE+uZmLgfULSN8WW1lKJe05Uol9bSwQlKNqW6Lfj8aWe0aeKQ/22z+iZvrILEricE9iRsPiUUUkwoAGuXCSWQuovtcNNTuM+iEcd51hUWhrQqt6UpgzrWkEbNrqBPwsQqb9zn5nlq6FXbMeq3SCy9smhKlVP5T+o0u7+gPKYGZi6WCBbvziKf+p4ZFRekgxKLOJswUrNTxAVCPDV0dVQ6aonrozY83PT9J9y718AX+L0jX8nHo1/yXRqcGl5tgBzDUJdBOtTxvG5Q1PW5Pbo09piEOfoNNuqASRbNrUcwyuAqrm81Za9bisQOiPe6kY
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days

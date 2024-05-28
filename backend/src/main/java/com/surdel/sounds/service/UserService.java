@@ -21,21 +21,12 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public User createUser(User user) {
-        return userRepository.save(user);
-    }
-
     public User updateUser(User user) {
         return userRepository.save(user);
     }
 
     public void deleteUser(Integer id) {
         userRepository.deleteById(id);
-    }
-
-    public User findByEmail(String email) {
-//        return userRepository.findByEmail(email);
-        return null;
     }
 
 }

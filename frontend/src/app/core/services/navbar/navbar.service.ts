@@ -16,7 +16,6 @@ export class NavbarService {
     { label: 'Wyposażenie', path: '/equipment' },
     { label: 'Oferta', path: '/offer' },
     { label: 'Kontakt', path: '/contact' },
-    { label: 'Rezerwacja', path: '/reservation' },
     { label: 'Logowanie', path: '/login' }
   ]);
 
@@ -35,8 +34,9 @@ export class NavbarService {
       { label: 'Dashboard', path: '/dashboard/hello' },
       { label: 'Twoje nagrania', path: '/dashboard/recordings' },
       { label: 'Twoje rezerwacje', path: '/dashboard/reservations' },
+      { label: 'Dodaj rezerwację', path: '/dashboard/reservation' },
       { label: 'Konto', path: '/dashboard/account' },
-      { label: 'Wyloguj', path: '/home' } // Zakładając, że dodasz funkcjonalność wylogowania
+      { label: 'Wyloguj', path: '/logout' } // Zakładając, że dodasz funkcjonalność wylogowania
     ];
     this.navLinks.next(dashboardLinks);
   }
@@ -48,7 +48,6 @@ export class NavbarService {
       { label: 'Wyposażenie', path: '/equipment' },
       { label: 'Oferta', path: '/offer' },
       { label: 'Kontakt', path: '/contact' },
-      { label: 'Rezerwacja', path: '/reservation' },
       { label: 'Logowanie', path: '/login' }
     ];
     this.navLinks.next(defaultLinks);

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import {FormGroup, FormControl, Validators, ReactiveFormsModule, FormBuilder} from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,31 +29,29 @@ import { AuthService } from "../../core/services/auth/auth.service";
   ]
 })
 export class LoginComponent {
-  loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required])
-  });
+  loginForm: FormGroup;
 
-  constructor(private authService: AuthService) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+  }
 
   onLogin(): void {
     if (this.loginForm.valid) {
-      const email = this.loginForm.value.email;
-      const password = this.loginForm.value.password;
+      const request = this.loginForm.value;
 
-      if (email && password) {
-        this.authService.login(email, password).subscribe(
-          data => {
-            console.log('Login successful', data);
-            // Redirect to home or dashboard etc.
-          },
-          error => {
-            console.log('Login failed', error);
-          }
-        );
-      } else {
-        console.log('Email or password is missing');
-      }
+      this.authService.login(request).subscribe(
+        response => {
+          console.log('Login successful', response);
+          localStorage.setItem('access_token', response.access_token);
+          this.router.navigate(['/dashboard']);
+        },
+        error => {
+          console.error('Login failed', error);
+        }
+      );
     }
   }
 
