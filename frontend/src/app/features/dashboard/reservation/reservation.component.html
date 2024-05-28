@@ -33,8 +33,9 @@
 
         <div class="right-panel">
           <mat-card>
-            <mat-calendar [selected]="reservationForm.controls['reservationDate'].value" 
-                          (selectedChange)="reservationForm.controls['reservationDate'].setValue($event)">
+            <mat-calendar [selected]="reservationForm.controls['reservationDate'].value"
+                          (selectedChange)="reservationForm.controls['reservationDate'].setValue($event)"
+                          ngSkipHydration>
             </mat-calendar>
           </mat-card>
         </div>

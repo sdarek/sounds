@@ -7,12 +7,24 @@ import { NavbarService } from "../navbar/navbar.service";
 import { RegisterRequest } from "../../models/register-request.model";
 import {AuthenticationRequest} from "../../models/login-request.model";
 
+export interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
+export interface AuthenticationResponse {
+  accessToken: string;
+  user: User;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiUrl = 'http://localhost:8080/api/v1/auth';
   private isAuthenticated = new BehaviorSubject<boolean>(this.hasToken());
+  private currentUser = new BehaviorSubject<User | null>(null);
 
   constructor(
     private router: Router,
@@ -23,6 +35,10 @@ export class AuthService {
     return typeof window !== 'undefined' && !!localStorage.getItem('access_token');
   }
 
+  getUser(): Observable<User | null> {
+    return this.currentUser.asObservable();
+  }
+
   register(request: RegisterRequest): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/register`, request);
   }
@@ -31,7 +47,11 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, request).pipe(
       tap(response => {
         localStorage.setItem('access_token', response.token);
+        localStorage.setItem('user', JSON.stringify(response.user));
+
         this.isAuthenticated.next(true);
+        this.currentUser.next(response.user);
+        this.navbarService.setDashboardLinks();
         this.router.navigate(['/dashboard']);
       }),
       catchError(error => {
@@ -44,8 +64,10 @@ export class AuthService {
   logout(): void {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('access_token');
+      localStorage.removeItem('user');
     }
     this.isAuthenticated.next(false);
+    this.currentUser.next(null);
     this.navbarService.resetLinks();
     this.router.navigate(['/home']);
   }
@@ -56,5 +78,12 @@ export class AuthService {
 
   getToken(): string | null {
     return localStorage.getItem('access_token');
+  }
+
+  loadUserFromStorage(): void {
+    const user = localStorage.getItem('user');
+    if (user) {
+      this.currentUser.next(JSON.parse(user));
+    }
   }
 }
