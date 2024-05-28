@@ -1,0 +1,57 @@
+@import '../../../styles/variables';
+.portfolio-page {
+    .container {
+      justify-content: flex-start; 
+      
+      .portfolio-item { 
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        margin: 10px 0;
+        width: 100%;
+        background-color: #555;  
+        border: 1px solid $third-color; // subtelne obramowanie
+        border-radius: 8px;
+        color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+        .content {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        
+          &.left {
+            flex-direction: row-reverse;  // Odwrócenie kolejności dla naprzemiennego układu
+          }
+        
+          .text-content {
+            width: 50%;
+            padding: 10px;
+          }
+        
+          .portfolio-video {
+            width: 50%;
+            video {
+              width: 100%;  // Rozciągnięcie wideo do pełnej dostępnej szerokości
+              height: auto;
+            }
+          }
+        }
+  
+        
+        .portfolio-title {
+          font-size: 1.5rem;
+          color: white;
+          margin-bottom: 10px;
+          text-align: center;
+        }
+
+        .portfolio-description {
+          font-size: 1rem;
+          color: #ccc;
+          padding: 20px;
+        }
+      }
+    }
+  }
+  

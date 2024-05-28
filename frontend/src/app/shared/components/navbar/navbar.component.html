@@ -1,0 +1,9 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <a routerLink="/">
+      <img src="assets/images/logo.png" alt="Logo" class="logo" />
+    </a>
+    <span class="spacer"></span>
+    <a *ngFor="let link of navLinks" mat-button [routerLink]="link.path" routerLinkActive="active" (click)="link.label === 'Wyloguj' ? logout() : null">{{ link.label }}</a>
+  </mat-toolbar-row>
+</mat-toolbar>

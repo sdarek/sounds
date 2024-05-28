@@ -1,0 +1,79 @@
+@import '../../../../styles/variables';
+
+.reservations-page {
+  .container {
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      
+
+      .btn-reserve, .btn-edit {
+        margin: 30px 0;
+        width: 200px;
+        height: 60px;
+        background-color: $third-color;
+        color: white;
+        border: none;
+        font-size: 1.1em;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+          background-color: darken($third-color, 5%);
+        }
+      }
+
+      .reservations-list {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+
+        .reservation-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
+          padding: 20px;
+          border-radius: 8px;
+          background-color: $primary-color;
+
+          .reservation-details {
+            color: white;
+            opacity: 0.9;
+            width: 45%;
+            h2 {
+              letter-spacing: 4px;
+              font-weight: bold;
+            }
+            p {
+              letter-spacing: 2px;
+              font-size: 0.9em;
+              margin: 0 0 5px 0;
+            }
+          }
+
+          .reservation-actions {
+            display: flex;
+            align-items: center;
+            width: 55%;
+
+            .reservation-logo {
+              width: 50%;
+              margin-right: 40px;
+            }
+
+            .btn-edit {
+              height: 50px;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

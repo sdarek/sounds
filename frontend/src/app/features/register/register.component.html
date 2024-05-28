@@ -1,0 +1,52 @@
+<div class="register-page page">
+    <div class="container">
+        <h2 class="register-header header">REJESTRACJA</h2>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+            <mat-form-field appearance="fill">
+              <mat-label>Imię</mat-label>
+              <input matInput formControlName="firstName" placeholder="Wpisz swoje imię">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Nazwisko</mat-label>
+              <input matInput formControlName="lastName" placeholder="Wpisz swoje nazwisko">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" placeholder="Wpisz swój email">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Telefon</mat-label>
+              <input matInput formControlName="phone" placeholder="Podaj swój numer telefonu">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Hasło</mat-label>
+              <input matInput type="password" formControlName="passwordHash" placeholder="Wpisz swoje hasło">
+            </mat-form-field>
+
+
+            <mat-form-field appearance="fill">
+                <mat-label>Potwierdź hasło</mat-label>
+                <input matInput type="password" formControlName="confirmPassword" placeholder="Powtórz hasło">
+                <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
+                Powtórzenie hasła jest wymagane.
+                </mat-error>
+                <mat-error *ngIf="registerForm.get('password')?.value !== registerForm.get('confirmPassword')?.value && registerForm.get('confirmPassword')?.touched">
+                Hasła nie pasują do siebie.
+                </mat-error>
+            </mat-form-field>
+
+            <div class="registration-link">
+              Masz już konto? <a routerLink="/login">Zaloguj się</a>
+            </div>
+
+            <hr>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">Zarejestruj się</button>
+          </form>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+@import '../../../styles/variables';
+
+.reservation-page {
+  .container {
+    .content-wrapper {
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      .left-panel, .right-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        &:first-child {
+          margin-right: 20px;
+        }
+      }
+
+      .reservation-type-field, .input-field{
+        width: 100%; // Pełna szerokość panelu
+      }
+
+      button {
+        //margin-top: 10px;
+        align-self: center;
+        background-color: $third-color;
+        padding: $btn-padding;
+      }
+
+      mat-card {
+        padding: 10px;
+      }
+    }
+  }
+}

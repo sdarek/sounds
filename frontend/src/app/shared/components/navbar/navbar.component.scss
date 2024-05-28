@@ -1,0 +1,41 @@
+@import '../../../../styles/variables';
+
+mat-toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); 
+    z-index: 100000;
+    height: $menu-height;
+    background-color: $menu-background; 
+
+    .mat-toolbar-row {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+
+    .spacer {
+        flex: 1 1 auto;
+    }
+    
+    .logo {
+        height: 70%;
+        filter: brightness(0) invert(1); 
+    }
+  
+    a {
+        color: white;
+        text-decoration: none;
+        margin: 0 10px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    
+    .active {
+        color: $third-color;
+    }
+}

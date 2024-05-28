@@ -1,0 +1,47 @@
+@import '../../../styles/variables';
+
+.login-page {  
+    .container {   
+        max-width: 400px;
+
+        hr {
+            width: 100%;
+            border: none;
+            border-top: 1px solid $third-color;
+            margin: 20px 0;
+        }
+        .registration-link {
+            text-align: center;
+            a {
+                color: $third-color;
+                text-decoration: none;
+                letter-spacing: 1px;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+    
+            mat-form-field {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+    
+            button {
+                background-color: $third-color;
+                padding: $btn-padding;
+                margin-top: 10px;
+            }
+
+            .btn-google {
+                background-color: #070774;
+            }
+        }
+    }
+  }
+  

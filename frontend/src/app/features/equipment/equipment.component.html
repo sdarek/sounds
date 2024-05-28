@@ -1,0 +1,17 @@
+<div class="equipment-page page">
+    <div class="container">
+      <h2 class="equipment-header header">WYPOSAŻENIE</h2>
+      <div class="equipment-item" *ngFor="let item of equipmentItems; let i = index">
+        <div [class]="i % 2 === 0 ? 'content left' : 'content right'">
+          <div class="text-content">
+            <h3 class="equipment-title">{{ item.title }}</h3>
+            <p class="equipment-description">{{ item.description }}</p>
+          </div>
+          <div class="equipment-image">
+            <img src="{{ item.imageUrl }}" alt="{{ item.title }}">
+          </div>
+        </div>
+        <mat-divider *ngIf="i < equipmentItems.length - 1"></mat-divider>
+      </div>
+    </div>
+</div>
