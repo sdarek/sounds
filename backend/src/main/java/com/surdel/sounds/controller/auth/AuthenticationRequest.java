@@ -1,4 +1,4 @@
-package com.surdel.sounds.controller;
+package com.surdel.sounds.controller.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

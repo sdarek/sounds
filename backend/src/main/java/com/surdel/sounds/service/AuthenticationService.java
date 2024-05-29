@@ -1,9 +1,9 @@
 package com.surdel.sounds.service;
 
-import com.surdel.sounds.controller.AuthenticationRequest;
-import com.surdel.sounds.controller.AuthenticationResponse;
-import com.surdel.sounds.controller.RegisterRequest;
-import com.surdel.sounds.controller.UserResponse;
+import com.surdel.sounds.controller.auth.AuthenticationRequest;
+import com.surdel.sounds.controller.auth.AuthenticationResponse;
+import com.surdel.sounds.controller.auth.RegisterRequest;
+import com.surdel.sounds.controller.auth.UserResponse;
 import com.surdel.sounds.model.Role;
 import com.surdel.sounds.model.User;
 import com.surdel.sounds.repository.UserRepository;
@@ -61,6 +61,7 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
 
         UserResponse userResponse = UserResponse.builder()
+                .id(user.getId())
                 .email(user.getEmail())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())

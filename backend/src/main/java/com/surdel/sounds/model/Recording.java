@@ -26,7 +26,7 @@ public class Recording {
     private String description;
 
     @Column(name = "start_date")
-    private Date startDate;
+    private Timestamp startDate;
 
     private String status;
 

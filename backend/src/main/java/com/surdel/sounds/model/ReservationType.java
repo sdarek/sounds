@@ -14,7 +14,7 @@ public class ReservationType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "type_name")
+    @Column(nullable = false, name = "type_name")
     private String typeName;
 
     private String description;

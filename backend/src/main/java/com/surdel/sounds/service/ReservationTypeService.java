@@ -9,9 +9,12 @@ import java.util.List;
 
 @Service
 public class ReservationTypeService {
+    private final ReservationTypeRepository reservationTypeRepository;
 
     @Autowired
-    private ReservationTypeRepository reservationTypeRepository;
+    public ReservationTypeService(ReservationTypeRepository reservationTypeRepository) {
+        this.reservationTypeRepository = reservationTypeRepository;
+    }
 
     public List<ReservationType> getAllReservationTypes() {
         return reservationTypeRepository.findAll();
@@ -21,11 +24,7 @@ public class ReservationTypeService {
         return reservationTypeRepository.findById(id).orElse(null);
     }
 
-    public ReservationType createReservationType(ReservationType reservationType) {
-        return reservationTypeRepository.save(reservationType);
-    }
-
-    public ReservationType updateReservationType(ReservationType reservationType) {
+    public ReservationType saveReservationType(ReservationType reservationType) {
         return reservationTypeRepository.save(reservationType);
     }
 

@@ -9,10 +9,16 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { ReservationService } from '../../../core/services/reservation/reservation.service';
+import { RecordingService, Recording } from '../../../core/services/recording/recording.service';
+import { NewRecordingDialogComponent } from '../new-recording-dialog/new-recording-dialog.component';
+import { AuthService, User } from '../../../core/services/auth/auth.service';
 
-interface ReservationOption {
-  title: string;
-  duration: string;
+interface ReservationType {
+  id: number;
+  typeName: string;
 }
 
 @Component({
@@ -30,44 +36,98 @@ interface ReservationOption {
     MatOptionModule,
     MatCardModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgxMaterialTimepickerModule
   ]
 })
 export class ReservationComponent implements OnInit {
   reservationForm: FormGroup;
+  reservationTypes: ReservationType[] = [];
+  recordings: Recording[] = [];
+  user: User | null = null;
 
-  reservationItems: ReservationOption[] = [
-    { title: 'Nagranie muzyczne', duration: '1h' },
-    { title: 'Nagranie lektorskie', duration: '1h' },
-    { title: 'Sesja fotograficzna', duration: '2h' }
-  ];
-  selectedReservationType?: ReservationOption;
-  selectedDate: Date | null = null;
-
-  constructor() {
+  constructor(
+    private reservationService: ReservationService,
+    private recordingService: RecordingService,
+    private authService: AuthService,
+    public dialog: MatDialog
+  ) {
     this.reservationForm = new FormGroup({
-      fullName: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      phone: new FormControl('', [Validators.required]),
       note: new FormControl(''),
       reservationType: new FormControl(null, [Validators.required]),
-      reservationDate: new FormControl(new Date(), [Validators.required])
+      recording: new FormControl(null, [Validators.required]),
+      reservationDate: new FormControl(new Date(), [Validators.required]),
+      reservationTime: new FormControl('', [Validators.required])
     });
   }
 
-  ngOnInit(): void {}
-  onDateSelect(event: Date): void {
-    this.selectedDate = event;
-    console.log('Wybrano datę:', this.selectedDate);
+  ngOnInit(): void {
+    this.authService.getUser().subscribe(user => {
+      console.log(user);
+      if (user) {
+        this.user = user;
+        this.loadRecordings(this.user.id);
+      }
+    });
+
+    this.loadReservationTypes();
   }
-  
+
+  loadReservationTypes(): void {
+    this.reservationService.getReservationTypes().subscribe(types => {
+      this.reservationTypes = types;
+    });
+  }
+
+  loadRecordings(userId: number): void {
+    this.recordingService.getUserRecordings(userId).subscribe(recordings => {
+      this.recordings = recordings;
+    }, error => {
+      console.error('Failed to load recordings', error);
+    });
+  }
+
+  onDateSelect(event: Date): void {
+    this.reservationForm.controls['reservationDate'].setValue(event);
+  }
+
+  openNewRecordingDialog(): void {
+    const dialogRef = this.dialog.open(NewRecordingDialogComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && this.user) {
+        this.recordingService.createRecording(this.user.id, result).subscribe(newRecording => {
+          this.recordings.push(newRecording);
+          this.reservationForm.controls['recording'].setValue(newRecording.id);
+        });
+      }
+    });
+  }
 
   onReserve(): void {
-    if (this.reservationForm.valid) {
-      console.log('Form Data:', this.reservationForm.value);
-      // Implement further logic to handle the reservation
+    if (this.reservationForm.valid && this.user) {
+      const formData = this.reservationForm.value;
+      const reservationDate = new Date(formData.reservationDate);
+
+      const [hours, minutes] = formData.reservationTime.split(':');
+      reservationDate.setHours(parseInt(hours, 10), parseInt(minutes, 10));
+
+      const reservationData = {
+        reservationDate: reservationDate.toISOString(),
+        notes: formData.note
+      };
+
+      this.reservationService.createReservation(this.user.id, formData.reservationType, formData.recording, reservationData).subscribe(response => {
+        console.log('Reservation successful', response);
+        console.log(reservationData);
+        // Implement further logic to handle successful reservation
+      }, error => {
+        console.error('Reservation failed', error);
+      });
     } else {
-      console.log('Form is not valid!');
+      console.log('Form is not valid or user is not logged in!');
     }
   }
 }

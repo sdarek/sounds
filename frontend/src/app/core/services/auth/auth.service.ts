@@ -6,8 +6,10 @@ import { Router } from "@angular/router";
 import { NavbarService } from "../navbar/navbar.service";
 import { RegisterRequest } from "../../models/register-request.model";
 import {AuthenticationRequest} from "../../models/login-request.model";
+import { StorageService } from '../storage/storage.service';
 
 export interface User {
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -29,7 +31,9 @@ export class AuthService {
   constructor(
     private router: Router,
     private navbarService: NavbarService,
-    private http: HttpClient) {}
+    private http: HttpClient,
+    private storageService: StorageService) {
+    this.loadUserFromStorage(); }
 
   private hasToken(): boolean {
     return typeof window !== 'undefined' && !!localStorage.getItem('access_token');
@@ -46,8 +50,8 @@ export class AuthService {
   login(request: AuthenticationRequest): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, request).pipe(
       tap(response => {
-        localStorage.setItem('access_token', response.token);
-        localStorage.setItem('user', JSON.stringify(response.user));
+        this.storageService.setItem('access_token', response.token);
+        this.storageService.setItem('user', JSON.stringify(response.user));
 
         this.isAuthenticated.next(true);
         this.currentUser.next(response.user);
@@ -63,8 +67,8 @@ export class AuthService {
 
   logout(): void {
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('user');
+      this.storageService.removeItem('access_token');
+      this.storageService.removeItem('user');
     }
     this.isAuthenticated.next(false);
     this.currentUser.next(null);
@@ -77,11 +81,11 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('access_token');
+    return this.storageService.getItem('access_token');
   }
 
   loadUserFromStorage(): void {
-    const user = localStorage.getItem('user');
+    const user = this.storageService.getItem('user');
     if (user) {
       this.currentUser.next(JSON.parse(user));
     }

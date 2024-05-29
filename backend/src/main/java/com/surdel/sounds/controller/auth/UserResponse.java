@@ -1,4 +1,4 @@
-package com.surdel.sounds.controller;
+package com.surdel.sounds.controller.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserResponse {
+    private Integer id;
     private String email;
     private String firstName;
     private String lastName;
