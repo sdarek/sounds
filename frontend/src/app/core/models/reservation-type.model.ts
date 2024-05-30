@@ -1,5 +1,5 @@
 export interface ReservationType {
-  id?: number;
+  id: number;
   typeName: string;
-  description: string;
+  description?: string;
 }

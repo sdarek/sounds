@@ -16,15 +16,25 @@ public class RecordingController {
     private final RecordingService recordingService;
 
     @PostMapping("/{userId}")
-    public ResponseEntity<Recording> createRecording(
+    public ResponseEntity<RecordingsResponse> createRecording(
             @PathVariable Integer userId,
             @RequestBody Recording recordingDetails) {
         return ResponseEntity.ok(recordingService.createRecording(userId, recordingDetails));
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Recording>> getUserRecordings(@PathVariable Integer userId) {
+    public ResponseEntity<List<RecordingsResponse>> getUserRecordings(@PathVariable Integer userId) {
         return ResponseEntity.ok(recordingService.getUserRecordings(userId));
+    }
+
+    @GetMapping("/user/{userId}/ongoing")
+    public ResponseEntity<List<RecordingsResponse>> getOngoingRecordings(@PathVariable Integer userId) {
+        return ResponseEntity.ok(recordingService.getOngoingRecordings(userId));
+    }
+
+    @GetMapping("/user/{userId}/done")
+    public ResponseEntity<List<RecordingsResponse>> getDoneRecordings(@PathVariable Integer userId) {
+        return ResponseEntity.ok(recordingService.getDoneRecordings(userId));
     }
 
     @PutMapping("/{recordingId}")

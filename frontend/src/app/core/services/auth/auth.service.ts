@@ -4,21 +4,10 @@ import { HttpClient } from "@angular/common/http";
 import {BehaviorSubject, catchError, Observable, of, tap, throwError} from 'rxjs';
 import { Router } from "@angular/router";
 import { NavbarService } from "../navbar/navbar.service";
-import { RegisterRequest } from "../../models/register-request.model";
-import {AuthenticationRequest} from "../../models/login-request.model";
+import { LoginRequest, RegisterRequest } from "../../models/auth.model";
 import { StorageService } from '../storage/storage.service';
+import {UserResponse} from "../../models/user.model";
 
-export interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-}
-
-export interface AuthenticationResponse {
-  accessToken: string;
-  user: User;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +15,7 @@ export interface AuthenticationResponse {
 export class AuthService {
   private apiUrl = 'http://localhost:8080/api/v1/auth';
   private isAuthenticated = new BehaviorSubject<boolean>(this.hasToken());
-  private currentUser = new BehaviorSubject<User | null>(null);
+  private currentUser = new BehaviorSubject<UserResponse | null>(null);
 
   constructor(
     private router: Router,
@@ -39,7 +28,7 @@ export class AuthService {
     return typeof window !== 'undefined' && !!localStorage.getItem('access_token');
   }
 
-  getUser(): Observable<User | null> {
+  getUser(): Observable<UserResponse | null> {
     return this.currentUser.asObservable();
   }
 
@@ -47,7 +36,7 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/register`, request);
   }
 
-  login(request: AuthenticationRequest): Observable<any> {
+  login(request: LoginRequest): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, request).pipe(
       tap(response => {
         this.storageService.setItem('access_token', response.token);

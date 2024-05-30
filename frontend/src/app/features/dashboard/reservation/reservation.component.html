@@ -19,7 +19,7 @@
         <mat-form-field appearance="fill" class="recording-field">
           <mat-label>Wybierz nagranie</mat-label>
           <mat-select formControlName="recording">
-            <mat-option *ngFor="let recording of recordings" [value]="recording.id">
+            <mat-option *ngFor="let recording of recordings" [value]="recording.recordingId">
               {{ recording.title }}
             </mat-option>
             <mat-option (click)="openNewRecordingDialog()">Utwórz nowe nagranie</mat-option>

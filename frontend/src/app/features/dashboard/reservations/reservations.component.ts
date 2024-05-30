@@ -1,42 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButton } from "@angular/material/button";
 import { RouterLink } from "@angular/router";
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
-
-interface Reservation {
-  id: string;
-  type: string;
-  date: Date;
-  time: string;
-  address: string;
-  cost: number;
-}
+import {ReservationService} from '../../../core/services/reservation/reservation.service';
+import { AuthService } from '../../../core/services/auth/auth.service';
+import {ReservationResponse} from "../../../core/models/reservation.model";
 
 @Component({
   selector: 'app-reservations',
   standalone: true,
-    imports: [
-      MatButton,
-      RouterLink,
-      CommonModule,
-      MatButtonModule,
-      MatIconModule
-    ],
+  imports: [
+    MatButton,
+    RouterLink,
+    CommonModule,
+    MatButtonModule,
+    MatIconModule
+  ],
   templateUrl: './reservations.component.html',
-  styleUrl: './reservations.component.scss'
+  styleUrls: ['./reservations.component.scss']
 })
-export class ReservationsComponent {
-  reservations: Reservation[] = [
-    { id: '1', type: 'Nagranie muzyczne', date: new Date(), time: '15:00', address: 'Warszawa, ul. Muzyczna 1', cost: 200 },
-    { id: '1', type: 'Nagranie muzyczne', date: new Date(), time: '15:00', address: 'Warszawa, ul. Muzyczna 1', cost: 200 },
-    { id: '1', type: 'Nagranie muzyczne', date: new Date(), time: '15:00', address: 'Warszawa, ul. Muzyczna 1', cost: 200 },
-    { id: '1', type: 'Nagranie muzyczne', date: new Date(), time: '15:00', address: 'Warszawa, ul. Muzyczna 1', cost: 200 },
-  ];
+export class ReservationsComponent implements OnInit {
+  reservations: ReservationResponse[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private reservationService: ReservationService,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.authService.getUser().subscribe(user => {
+      if (user) {
+        this.loadUserReservations(user.id);
+      }
+    });
+  }
+
+  loadUserReservations(userId: number): void {
+    this.reservationService.getUserReservations(userId).subscribe(reservations => {
+      this.reservations = reservations;
+    });
+  }
 
   editReservation(reservationId: string): void {
     this.router.navigate(['/reservation/edit', reservationId]);

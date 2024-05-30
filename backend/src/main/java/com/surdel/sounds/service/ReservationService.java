@@ -1,5 +1,8 @@
 package com.surdel.sounds.service;
 
+import com.surdel.sounds.controller.reservation.RecordingResponse;
+import com.surdel.sounds.controller.reservation.ReservationResponse;
+import com.surdel.sounds.controller.reservation.ReservationTypeResponse;
 import com.surdel.sounds.model.Recording;
 import com.surdel.sounds.model.Reservation;
 import com.surdel.sounds.model.User;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -52,8 +56,26 @@ public class ReservationService {
         return recordingRepository.save(recording);
     }
 
-    public List<Reservation> getUserReservations(Integer userId) {
-        return reservationRepository.findByUserId(userId);
+    public List<ReservationResponse> getUserReservations(Integer userId) {
+        List<Reservation> reservations = reservationRepository.findByUserId(userId);
+        return reservations.stream()
+                .map(this::mapToReservationResponse)
+                .collect(Collectors.toList());
+
+    }
+
+    private ReservationResponse mapToReservationResponse(Reservation reservation) {
+        return ReservationResponse.builder()
+                .reservationDate(reservation.getReservationDate())
+                .notes(reservation.getNotes())
+                .reservationType(ReservationTypeResponse.builder()
+                        .reservationName(reservation.getReservationType().getTypeName())
+                        .description(reservation.getReservationType().getDescription())
+                        .build())
+                .recording(RecordingResponse.builder()
+                        .title(reservation.getRecording().getTitle())
+                        .build())
+                .build();
     }
 
     public Reservation updateReservation(Integer reservationId, Integer reservationTypeId, Integer recordingId, Reservation reservationDetails) {

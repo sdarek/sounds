@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import {MatAnchor} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
 import { MatButtonModule } from '@angular/material/button';
-import {AuthService, User} from "../../../core/services/auth/auth.service";
+import {AuthService} from "../../../core/services/auth/auth.service";
+import {UserResponse} from "../../../core/models/user.model";
 
 @Component({
   selector: 'app-hello',
@@ -13,7 +14,7 @@ import {AuthService, User} from "../../../core/services/auth/auth.service";
   styleUrl: './hello.component.scss'
 })
 export class HelloComponent implements OnInit {
-  user: User | null = null;
+  user: UserResponse | null = null;
   constructor(private authService: AuthService) {
   }
   ngOnInit() {

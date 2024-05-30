@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {RecordingRequest, RecordingsResponse} from "../../models/recording.model";
 
-export interface Recording {
-  id: number;
-  title: string;
-  userId: number;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +12,24 @@ export class RecordingService {
 
   constructor(private http: HttpClient) {}
 
-  getUserRecordings(userId: number): Observable<Recording[]> {
-    return this.http.get<Recording[]>(`${this.apiUrl}/user/${userId}`);
+  getUserRecordings(userId: number): Observable<RecordingsResponse[]> {
+    return this.http.get<RecordingsResponse[]>(`${this.apiUrl}/user/${userId}`);
   }
 
-  createRecording(userId: number, recordingData: Recording): Observable<Recording> {
-    return this.http.post<Recording>(`${this.apiUrl}/${userId}`, recordingData);
+  getOngoingRecordings(userId: number): Observable<RecordingsResponse[]> {
+    return this.http.get<RecordingsResponse[]>(`${this.apiUrl}/user/${userId}/ongoing`);
   }
 
-  updateRecording(recordingId: number, recordingData: Recording): Observable<Recording> {
-    return this.http.put<Recording>(`${this.apiUrl}/${recordingId}`, recordingData);
+  getDoneRecordings(userId: number): Observable<RecordingsResponse[]> {
+    return this.http.get<RecordingsResponse[]>(`${this.apiUrl}/user/${userId}/done`);
+  }
+
+  createRecording(userId: number, recordingData: RecordingRequest): Observable<RecordingsResponse> {
+    return this.http.post<RecordingsResponse>(`${this.apiUrl}/${userId}`, recordingData);
+  }
+
+  updateRecording(recordingId: number, recordingData: RecordingRequest): Observable<RecordingRequest> {
+    return this.http.put<RecordingRequest>(`${this.apiUrl}/${recordingId}`, recordingData);
   }
 
   deleteRecording(recordingId: number): Observable<void> {

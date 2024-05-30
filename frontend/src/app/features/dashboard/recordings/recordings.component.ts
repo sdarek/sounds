@@ -1,18 +1,14 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {Component, OnInit, ViewChild, AfterViewInit, ElementRef, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { register } from 'swiper/element/bundle';
 register();
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-
-
-
-interface Recording {
-  id: string;
-  title: string;
-  status: string;
-}
+import { RecordingsResponse } from "../../../core/models/recording.model";
+import { RecordingService } from "../../../core/services/recording/recording.service";
+import { StorageService } from "../../../core/services/storage/storage.service";
+import { UserResponse } from "../../../core/models/user.model";
 
 @Component({
   selector: 'app-recordings',
@@ -23,40 +19,70 @@ interface Recording {
     CommonModule
   ],
   templateUrl: './recordings.component.html',
-  styleUrl: './recordings.component.scss',
+  styleUrls: ['./recordings.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class RecordingsComponent {
-  ongoingRecordings: Recording[] = [];
-  doneRecordings: Recording[] = [];
+export class RecordingsComponent implements OnInit, AfterViewInit {
+  @ViewChild('ongoingSwiper', { static: false }) ongoingSwiper?: ElementRef;
+  @ViewChild('doneSwiper', { static: false }) doneSwiper?: ElementRef;
 
-  constructor() {
+  ongoingRecordings: RecordingsResponse[] = [];
+  doneRecordings: RecordingsResponse[] = [];
+  user: UserResponse | null = null;
+
+  constructor(
+    private recordingService: RecordingService,
+    private storageService: StorageService) {
   }
 
   ngOnInit(): void {
-    this.loadRecordings();
+    const userString = this.storageService.getUser();
+    if (userString) {
+      this.user = JSON.parse(userString) as UserResponse;
+      this.loadRecordings();
+    }
   }
 
-  loadRecordings(): void {
-    this.ongoingRecordings = [
-      { id: '1', title: 'Sesja 1', status: 'ongoing' },
-      { id: '2', title: 'Sesja 2', status: 'ongoing' },
-      { id: '3', title: 'Sesja 3', status: 'ongoing' },
-      { id: '4', title: 'Sesja 4', status: 'ongoing' },
-      { id: '5', title: 'Sesja 5', status: 'ongoing' },
-    ];
-
-    this.doneRecordings = [
-      { id: '1', title: 'Cos tam', status: 'done' },
-      { id: '2', title: 'Cos tam2', status: 'done' },
-      { id: '3', title: 'Cos tam3', status: 'done' },
-      { id: '4', title: 'Cos tam4', status: 'done' },
-      { id: '5', title: 'Cos tam5', status: 'done' },
-      { id: '6', title: 'Cos tam6', status: 'done' },
-    ];
+  ngAfterViewInit(): void {
+    this.updateSwipers();
   }
 
-  editRecordingSettings(recordingId: string): void {
+  private loadRecordings() {
+    if (this.user) {
+      this.recordingService.getOngoingRecordings(this.user.id).subscribe(recordings => {
+        this.ongoingRecordings = recordings;
+        this.updateOngoingSwiper();
+      });
+
+      this.recordingService.getDoneRecordings(this.user.id).subscribe(recordings => {
+        this.doneRecordings = recordings;
+        this.updateDoneSwiper();
+      });
+    }
+  }
+
+  private updateOngoingSwiper() {
+    setTimeout(() => {
+      if (this.ongoingSwiper && this.ongoingSwiper.nativeElement.swiper) {
+        this.ongoingSwiper.nativeElement.swiper.update();
+      }
+    }, 0);
+  }
+
+  private updateDoneSwiper() {
+    setTimeout(() => {
+      if (this.doneSwiper && this.doneSwiper.nativeElement.swiper) {
+        this.doneSwiper.nativeElement.swiper.update();
+      }
+    }, 0);
+  }
+
+  private updateSwipers() {
+    this.updateOngoingSwiper();
+    this.updateDoneSwiper();
+  }
+
+  editRecordingSettings(recordingId: number): void {
     console.log('Edycja ustawień dla nagrania o ID:', recordingId);
     // Tutaj można dodać logikę otwarcia dialogu edycji lub przekierowania do strony edycji
   }

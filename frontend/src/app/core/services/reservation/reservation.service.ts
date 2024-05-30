@@ -1,17 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ReservationType } from "../../models/reservation-type.model";
+import {ReservationRequest, ReservationResponse} from "../../models/reservation.model";
 
-export interface ReservationType {
-  id: number;
-  typeName: string;
-}
-
-export interface Reservation {
-  id?: number;
-  note: string;
-  reservationDate: string;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -25,16 +17,16 @@ export class ReservationService {
     return this.http.get<ReservationType[]>(`${this.apiUrl}/types`);
   }
 
-  getUserReservations(userId: number): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.apiUrl}/user/${userId}`);
+  getUserReservations(userId: number): Observable<ReservationResponse[]> {
+    return this.http.get<ReservationResponse[]>(`${this.apiUrl}/user/${userId}`);
   }
 
-  createReservation(userId: number, reservationTypeId: number, recordingId: number, reservationData: { reservationDate: string, notes: string }): Observable<Reservation> {
-    return this.http.post<Reservation>(`${this.apiUrl}/${userId}/${reservationTypeId}/${recordingId}`, reservationData);
+  createReservation(userId: number, reservationTypeId: number, recordingId: number, reservationData: { reservationDate: string, notes: string }): Observable<ReservationRequest> {
+    return this.http.post<ReservationRequest>(`${this.apiUrl}/${userId}/${reservationTypeId}/${recordingId}`, reservationData);
   }
 
-  updateReservation(reservationId: number, reservationTypeId: number, recordingId: number, reservationData: { reservationDate: string, note: string }): Observable<Reservation> {
-    return this.http.put<Reservation>(`${this.apiUrl}/${reservationId}/${reservationTypeId}/${recordingId}`, reservationData);
+  updateReservation(reservationId: number, reservationTypeId: number, recordingId: number, reservationData: { reservationDate: string, note: string }): Observable<ReservationRequest> {
+    return this.http.put<ReservationRequest>(`${this.apiUrl}/${reservationId}/${reservationTypeId}/${recordingId}`, reservationData);
   }
 
   deleteReservation(reservationId: number): Observable<void> {

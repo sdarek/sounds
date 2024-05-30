@@ -10,3 +10,16 @@ export interface Recording {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface RecordingRequest {
+  id: number;
+  title: string;
+  userId: number;
+}
+
+export interface RecordingsResponse {
+  recordingId: number;
+  description?: string;
+  status: string;
+  title: string;
+}

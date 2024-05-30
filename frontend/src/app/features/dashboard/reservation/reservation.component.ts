@@ -12,14 +12,12 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ReservationService } from '../../../core/services/reservation/reservation.service';
-import { RecordingService, Recording } from '../../../core/services/recording/recording.service';
+import { RecordingService } from '../../../core/services/recording/recording.service';
 import { NewRecordingDialogComponent } from '../new-recording-dialog/new-recording-dialog.component';
-import { AuthService, User } from '../../../core/services/auth/auth.service';
-
-interface ReservationType {
-  id: number;
-  typeName: string;
-}
+import { AuthService } from '../../../core/services/auth/auth.service';
+import {UserResponse} from "../../../core/models/user.model";
+import {ReservationType} from "../../../core/models/reservation-type.model";
+import {RecordingsResponse} from "../../../core/models/recording.model";
 
 @Component({
   selector: 'app-reservation',
@@ -43,8 +41,8 @@ interface ReservationType {
 export class ReservationComponent implements OnInit {
   reservationForm: FormGroup;
   reservationTypes: ReservationType[] = [];
-  recordings: Recording[] = [];
-  user: User | null = null;
+  recordings: RecordingsResponse[] = [];
+  user: UserResponse | null = null;
 
   constructor(
     private reservationService: ReservationService,
@@ -63,9 +61,9 @@ export class ReservationComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getUser().subscribe(user => {
-      console.log(user);
       if (user) {
         this.user = user;
+        // @ts-ignore
         this.loadRecordings(this.user.id);
       }
     });
@@ -82,6 +80,7 @@ export class ReservationComponent implements OnInit {
   loadRecordings(userId: number): void {
     this.recordingService.getUserRecordings(userId).subscribe(recordings => {
       this.recordings = recordings;
+      console.log(recordings);
     }, error => {
       console.error('Failed to load recordings', error);
     });
@@ -100,7 +99,8 @@ export class ReservationComponent implements OnInit {
       if (result && this.user) {
         this.recordingService.createRecording(this.user.id, result).subscribe(newRecording => {
           this.recordings.push(newRecording);
-          this.reservationForm.controls['recording'].setValue(newRecording.id);
+          console.log(newRecording);
+          this.reservationForm.controls['recording'].setValue(newRecording.recordingId);
         });
       }
     });

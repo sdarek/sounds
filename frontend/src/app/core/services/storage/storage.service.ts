@@ -28,6 +28,13 @@ export class StorageService {
     return null;
   }
 
+  getUser(): string | null {
+    if (this.isLocalStorageAvailable) {
+      return localStorage.getItem('user');
+    }
+    return null;
+  }
+
   setItem(key: string, value: string): void {
     if (this.isLocalStorageAvailable) {
       localStorage.setItem(key, value);

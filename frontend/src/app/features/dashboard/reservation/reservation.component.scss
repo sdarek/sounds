@@ -18,18 +18,39 @@
       }
 
       .reservation-type-field, .input-field, .recording-field {
-        width: 100%; // Pełna szerokość panelu
+        width: 100%;
+        margin-bottom: 15px; /* Added spacing between form fields */
       }
 
       button {
-        //margin-top: 10px;
         align-self: center;
         background-color: $third-color;
         padding: $btn-padding;
+        transition: background-color 0.3s ease;
+        &:hover {
+          background-color: darken($third-color, 10%);
+        }
       }
 
       mat-card {
         padding: 10px;
+        width: 100%; /* Ensure the card takes the full width of its container */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      mat-calendar {
+        width: 100%; /* Ensure the calendar takes the full width of its container */
+      }
+
+      .header {
+        background: linear-gradient(45deg, $primary-color, $secondary-color);
+        color: white;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 0.1em;
       }
     }
   }
