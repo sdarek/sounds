@@ -37,6 +37,11 @@ public class RecordingController {
         return ResponseEntity.ok(recordingService.getDoneRecordings(userId));
     }
 
+    @GetMapping("/{recordingId}")
+    public ResponseEntity<RecordingResponse> getRecording(@PathVariable Integer recordingId) {
+        return ResponseEntity.ok(recordingService.getRecording(recordingId));
+    }
+
     @PutMapping("/{recordingId}")
     public ResponseEntity<Recording> updateRecording(
             @PathVariable Integer recordingId,

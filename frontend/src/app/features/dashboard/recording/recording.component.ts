@@ -3,7 +3,6 @@ import {ActivatedRoute} from "@angular/router";
 import {RecordingResponse} from "../../../core/models/recording.model";
 import {MessageResponse} from "../../../core/models/message.model";
 import {RecordingService} from "../../../core/services/recording/recording.service";
-import {MessageService} from "../../../core/services/message/message.service";
 
 @Component({
   selector: 'app-recording',
@@ -19,28 +18,22 @@ export class RecordingComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private recordingService: RecordingService,
-    private messageService: MessageService
+    private recordingService: RecordingService
   ) {}
 
   ngOnInit(): void {
     const recordingId = this.route.snapshot.paramMap.get('id');
     if (recordingId) {
       this.loadRecordingDetails(+recordingId);
-      this.loadMessagesDetails(+recordingId);
     }
   }
 
   private loadRecordingDetails(id: number) {
     this.recordingService.getRecordingById(id).subscribe(recording => {
       this.recording = recording;
+      this.workingMessages = recording.messagesWorking;
+      this.finalMessages = recording.messagesFinal;
     });
   }
 
-  private loadMessagesDetails(id: number) {
-    this.messageService.getMessagesByRecordingId(id).subscribe(messages => {
-      this.workingMessages = messages.messagesWorking;
-      this.finalMessages = messages.messagesFinal;
-    });
-  }
 }

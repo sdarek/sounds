@@ -1,7 +1,11 @@
 package com.surdel.sounds.service;
 
+import com.surdel.sounds.controller.message.MessageResponse;
+import com.surdel.sounds.controller.recording.RecordingResponse;
 import com.surdel.sounds.controller.recording.RecordingsResponse;
+import com.surdel.sounds.model.Message;
 import com.surdel.sounds.model.Recording;
+import com.surdel.sounds.repository.MessageRepository;
 import com.surdel.sounds.repository.RecordingRepository;
 import com.surdel.sounds.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +22,7 @@ public class RecordingService {
 
     private final RecordingRepository recordingRepository;
     private final UserRepository userRepository;
+    private final MessageRepository messageRepository;
 
     public RecordingsResponse createRecording(Integer userId, Recording recordingDetails) {
         var user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
@@ -64,6 +69,36 @@ public class RecordingService {
                 .collect(Collectors.toList());
     }
 
+    public RecordingResponse getRecording(Integer recordingId) {
+        var recording = recordingRepository.findById(recordingId).orElseThrow(() -> new RuntimeException("Recording not found"));
+        var messagesWorking = messageRepository.findByRecordingAndIsFinalVersion(recording, false);
+        var messagesFinal = messageRepository.findByRecordingAndIsFinalVersion(recording, true);
+
+        return RecordingResponse.builder()
+                .recordingId(recording.getId())
+                .createdAt(recording.getCreatedAt())
+                .description(recording.getDescription())
+                .startDate(recording.getStartDate())
+                .status(recording.getStatus())
+                .title(recording.getTitle())
+                .messagesWorking(messagesWorking.stream()
+                        .map(this::toMessageResponse)
+                        .toArray(MessageResponse[]::new))
+                .messagesFinal(messagesFinal.stream()
+                        .map(this::toMessageResponse)
+                        .toArray(MessageResponse[]::new))
+                .build();
+    }
+
+    private MessageResponse toMessageResponse(Message message) {
+        return MessageResponse.builder()
+                .filePath(message.getFilePath())
+                .fileType(message.getFileType())
+                .messageText(message.getMessageText())
+                .sentAt(message.getSentAt())
+                .build();
+    }
+
     public Recording updateRecording(Integer recordingId, Recording recordingDetails) {
         var recording = recordingRepository.findById(recordingId)
                 .orElseThrow(() -> new RuntimeException("Recording not found"));
@@ -80,4 +115,5 @@ public class RecordingService {
                 .orElseThrow(() -> new RuntimeException("Recording not found"));
         recordingRepository.delete(recording);
     }
+
 }

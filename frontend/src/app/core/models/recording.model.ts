@@ -32,6 +32,6 @@ export interface RecordingResponse {
   startDate: Date;
   status: string;
   title: string;
-  messagesWorking : MessageResponse;
-  messagesFinal : MessageResponse;
+  messagesWorking : MessageResponse[];
+  messagesFinal : MessageResponse[];
 }
