@@ -11,3 +11,10 @@ export interface Message {
   isFinalVersion: boolean;
   sentAt?: string;
 }
+
+export interface MessageResponse {
+  filePath: string;
+  fileType: string;
+  messageText: string;
+  sentAt: Date;
+}

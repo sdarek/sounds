@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {RecordingRequest, RecordingsResponse} from "../../models/recording.model";
+import {RecordingRequest, RecordingResponse, RecordingsResponse} from "../../models/recording.model";
 
 
 @Injectable({
@@ -26,6 +26,10 @@ export class RecordingService {
 
   createRecording(userId: number, recordingData: RecordingRequest): Observable<RecordingsResponse> {
     return this.http.post<RecordingsResponse>(`${this.apiUrl}/${userId}`, recordingData);
+  }
+
+  getRecordingById(id: number): Observable<RecordingResponse> {
+    return this.http.get<RecordingResponse>(`${this.apiUrl}/${id}`)
   }
 
   updateRecording(recordingId: number, recordingData: RecordingRequest): Observable<RecordingRequest> {

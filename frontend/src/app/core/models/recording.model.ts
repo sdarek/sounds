@@ -1,4 +1,5 @@
 import { User } from './user.model';
+import {MessageResponse} from "./message.model";
 
 export interface Recording {
   id?: number;
@@ -22,4 +23,15 @@ export interface RecordingsResponse {
   description?: string;
   status: string;
   title: string;
+}
+
+export interface RecordingResponse {
+  recordingId: number;
+  createdAt: Date;
+  description?: string;
+  startDate: Date;
+  status: string;
+  title: string;
+  messagesWorking : MessageResponse;
+  messagesFinal : MessageResponse;
 }

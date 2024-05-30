@@ -46,6 +46,6 @@ export class ReservationsComponent implements OnInit {
   }
 
   editReservation(reservationId: string): void {
-    this.router.navigate(['/reservation/edit', reservationId]);
+    this.router.navigate(['/dashboard/reservation/edit', reservationId]);
   }
 }

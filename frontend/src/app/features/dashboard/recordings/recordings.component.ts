@@ -9,6 +9,7 @@ import { RecordingsResponse } from "../../../core/models/recording.model";
 import { RecordingService } from "../../../core/services/recording/recording.service";
 import { StorageService } from "../../../core/services/storage/storage.service";
 import { UserResponse } from "../../../core/models/user.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-recordings',
@@ -32,7 +33,8 @@ export class RecordingsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private recordingService: RecordingService,
-    private storageService: StorageService) {
+    private storageService: StorageService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -83,7 +85,6 @@ export class RecordingsComponent implements OnInit, AfterViewInit {
   }
 
   editRecordingSettings(recordingId: number): void {
-    console.log('Edycja ustawień dla nagrania o ID:', recordingId);
-    // Tutaj można dodać logikę otwarcia dialogu edycji lub przekierowania do strony edycji
+    this.router.navigate(['/dashboard/recordings', recordingId]);
   }
 }

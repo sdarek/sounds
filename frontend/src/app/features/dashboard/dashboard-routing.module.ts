@@ -7,6 +7,7 @@ import {RecordingsComponent} from "./recordings/recordings.component";
 import {ReservationsComponent} from "./reservations/reservations.component";
 import {AccountComponent} from "./account/account.component";
 import {ReservationComponent} from "./reservation/reservation.component";
+import {RecordingComponent} from "./recording/recording.component";
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
     children: [
       { path: 'hello', component: HelloComponent },
       { path: 'recordings', component: RecordingsComponent },
+      { path: 'recordings/:id', component: RecordingComponent },
       { path: 'reservation', component: ReservationComponent },
       { path: 'reservations', component: ReservationsComponent },
       { path: 'account', component: AccountComponent },
