@@ -1,5 +1,6 @@
 package com.surdel.sounds.controller.message;
 
+import com.surdel.sounds.controller.auth.UserResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +17,5 @@ public class MessageResponse {
     private String fileType;
     private String messageText;
     private Timestamp sentAt;
+    private UserResponse sender;
 }

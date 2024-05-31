@@ -29,7 +29,7 @@ export interface RecordingResponse {
   recordingId: number;
   createdAt: Date;
   description?: string;
-  startDate: Date;
+  startDate: Date | null;
   status: string;
   title: string;
   messagesWorking : MessageResponse[];

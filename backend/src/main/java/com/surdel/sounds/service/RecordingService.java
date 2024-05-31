@@ -1,5 +1,6 @@
 package com.surdel.sounds.service;
 
+import com.surdel.sounds.controller.auth.UserResponse;
 import com.surdel.sounds.controller.message.MessageResponse;
 import com.surdel.sounds.controller.recording.RecordingResponse;
 import com.surdel.sounds.controller.recording.RecordingsResponse;
@@ -91,11 +92,19 @@ public class RecordingService {
     }
 
     private MessageResponse toMessageResponse(Message message) {
+        var user = message.getSender();
         return MessageResponse.builder()
                 .filePath(message.getFilePath())
                 .fileType(message.getFileType())
                 .messageText(message.getMessageText())
                 .sentAt(message.getSentAt())
+                .sender(UserResponse.builder()
+                        .id(user.getId())
+                        .email(user.getEmail())
+                        .firstName(user.getFirstName())
+                        .lastName(user.getLastName())
+                        .role(String.valueOf(user.getRole()))
+                        .build())
                 .build();
     }
 
