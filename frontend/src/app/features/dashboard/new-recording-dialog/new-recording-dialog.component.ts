@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MatDialogActions, MatDialogContent, MatDialogRef} from '@angular/material/dialog';
+import {MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -15,7 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatButtonModule,
     MatDialogActions,
-    MatDialogContent
+    MatDialogContent,
+    MatDialogTitle
   ]
 })
 export class NewRecordingDialogComponent {
