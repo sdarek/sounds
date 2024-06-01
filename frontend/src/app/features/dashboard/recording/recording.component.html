@@ -12,9 +12,9 @@
       </div>
 
       <div class="messages-section">
-        <div class="working-messages">
+        <div class="working-messages" >
           <h3>Wiadomości robocze</h3>
-          <ul>
+          <ul #workingMessagesContainer>
             <li *ngFor="let message of workingMessages" [ngClass]="{'sent-message': isSender(message.sender)}">
               <p><strong>{{ message.sender.firstName }} {{ message.sender.lastName }}</strong>, {{ message.sentAt | date:'medium' }}</p>
               <p>{{ message.messageText }}</p>
@@ -24,7 +24,10 @@
             </li>
           </ul>
           <div class="message-input">
-            <button (click)="attachFile()">Załącz plik</button>
+            <div class="file-input-container">
+              <span class="custom-file-input" (click)="workingFileInput.click()">Załącz plik</span>
+              <input type="file" #workingFileInput (change)="onFileSelected($event)">
+            </div>
             <textarea placeholder="Napisz wiadomość..." [(ngModel)]="newWorkingMessage"></textarea>
             <button (click)="sendWorkingMessage()">Wyślij</button>
           </div>
@@ -32,7 +35,7 @@
 
         <div class="final-messages">
           <h3>Wiadomości końcowe</h3>
-          <ul>
+          <ul #finalMessagesContainer>
             <li *ngFor="let message of finalMessages" [ngClass]="{'sent-message': isSender(message.sender)}">
               <p><strong>{{ message.sender.firstName }} {{ message.sender.lastName }}</strong>, {{ message.sentAt | date:'medium' }}</p>
               <p>{{ message.messageText }}</p>
@@ -42,7 +45,10 @@
             </li>
           </ul>
           <div class="message-input">
-            <button (click)="attachFile()">Załącz plik</button>
+            <div class="file-input-container">
+              <span class="custom-file-input" (click)="finalFileInput.click()">Dodaj Plik</span>
+              <input type="file" #finalFileInput (change)="onFileSelected($event)">
+            </div>
             <textarea placeholder="Napisz wiadomość..." [(ngModel)]="newFinalMessage"></textarea>
             <button (click)="sendFinalMessage()">Wyślij</button>
           </div>

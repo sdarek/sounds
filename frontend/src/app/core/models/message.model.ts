@@ -3,13 +3,13 @@ import {User, UserResponse} from './user.model';
 
 export interface Message {
   id?: number;
-  recording: Recording;
-  sender: User;
+  recordingId: number;
+  senderId: number;
   messageText: string;
   filePath: string;
   fileType: string;
   isFinalVersion: boolean;
-  sentAt?: string;
+  sentAt: string;
 }
 
 export interface MessageResponse {
@@ -18,4 +18,14 @@ export interface MessageResponse {
   messageText: string;
   sentAt: Date;
   sender: UserResponse
+}
+
+export interface MessageRequest {
+  recordingId: number;
+  senderId: number;
+  messageText: string;
+  filePath: string;
+  fileType: string;
+  isFinalVersion: boolean;
+  sentAt: string;
 }
