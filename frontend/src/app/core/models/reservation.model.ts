@@ -20,12 +20,13 @@ export interface ReservationRequest {
 }
 
 export interface ReservationResponse {
-  id: string;
+  id: number;
   reservationType: {
     reservationName: string;
     description: string;
   };
   recording: {
+    recordingId: number;
     title: string;
   };
   reservationDate: string;

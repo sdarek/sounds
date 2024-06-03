@@ -18,6 +18,7 @@ import { AuthService } from '../../../core/services/auth/auth.service';
 import {UserResponse} from "../../../core/models/user.model";
 import {ReservationType} from "../../../core/models/reservation-type.model";
 import {RecordingsResponse} from "../../../core/models/recording.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-reservation',
@@ -48,7 +49,8 @@ export class ReservationComponent implements OnInit {
     private reservationService: ReservationService,
     private recordingService: RecordingService,
     private authService: AuthService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {
     this.reservationForm = new FormGroup({
       note: new FormControl(''),
@@ -122,6 +124,7 @@ export class ReservationComponent implements OnInit {
       this.reservationService.createReservation(this.user.id, formData.reservationType, formData.recording, reservationData).subscribe(response => {
         console.log('Reservation successful', response);
         console.log(reservationData);
+        this.router.navigate(['/dashboard/reservations']);
         // Implement further logic to handle successful reservation
       }, error => {
         console.error('Reservation failed', error);

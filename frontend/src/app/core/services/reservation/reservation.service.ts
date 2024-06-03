@@ -30,6 +30,7 @@ export class ReservationService {
   }
 
   deleteReservation(reservationId: number): Observable<void> {
+    console.log(`${this.apiUrl}/${reservationId}`);
     return this.http.delete<void>(`${this.apiUrl}/${reservationId}`);
   }
 }

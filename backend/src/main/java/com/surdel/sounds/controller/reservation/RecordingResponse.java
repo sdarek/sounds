@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RecordingResponse {
+    private Integer recordingId;
     private String title;
 }

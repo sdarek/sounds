@@ -24,6 +24,7 @@ import {ReservationResponse} from "../../../core/models/reservation.model";
 })
 export class ReservationsComponent implements OnInit {
   reservations: ReservationResponse[] = [];
+  userId: number | null = null;
 
   constructor(
     private router: Router,
@@ -35,6 +36,7 @@ export class ReservationsComponent implements OnInit {
     this.authService.getUser().subscribe(user => {
       if (user) {
         this.loadUserReservations(user.id);
+        this.userId = user.id;
       }
     });
   }
@@ -46,6 +48,24 @@ export class ReservationsComponent implements OnInit {
   }
 
   editReservation(reservationId: string): void {
+    console.log(reservationId);
     this.router.navigate(['/dashboard/reservation/edit', reservationId]);
+  }
+
+  deleteReservation(reservationId: number) {
+    console.log(reservationId);
+    this.reservationService.deleteReservation(reservationId).subscribe({
+      next: () => {
+        console.log('Reservation deleted successfully')
+        if(this.userId)
+        this.loadUserReservations(this.userId);
+      },
+      error: (err) => console.error('Error deleting reservation:', err)
+    });
+  }
+
+  showRecording(recordingId: number) {
+    console.log(recordingId);
+    this.router.navigate(['/dashboard/recordings', recordingId]);
   }
 }

@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReservationRequest {
+    private Integer id;
     private String notes;
     private Timestamp reservationDate;
     private Integer recordingId;

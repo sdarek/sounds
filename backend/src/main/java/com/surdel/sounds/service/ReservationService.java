@@ -66,6 +66,7 @@ public class ReservationService {
 
     private ReservationResponse mapToReservationResponse(Reservation reservation) {
         return ReservationResponse.builder()
+                .id(reservation.getId())
                 .reservationDate(reservation.getReservationDate())
                 .notes(reservation.getNotes())
                 .reservationType(ReservationTypeResponse.builder()
@@ -73,6 +74,7 @@ public class ReservationService {
                         .description(reservation.getReservationType().getDescription())
                         .build())
                 .recording(RecordingResponse.builder()
+                        .recordingId(reservation.getRecording().getId())
                         .title(reservation.getRecording().getTitle())
                         .build())
                 .build();
