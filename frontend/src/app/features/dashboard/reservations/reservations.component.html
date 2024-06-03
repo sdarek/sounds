@@ -1,20 +1,26 @@
 <div class="reservations-page page">
   <div class="container">
     <div class="content">
-      <button mat-raised-button color="primary" routerLink="/reservation/add" class="btn-reserve">Dodaj rezerwację</button>
+      <button mat-raised-button color="primary" routerLink="/dashboard/reservation" class="btn-reserve">Dodaj rezerwację</button>
       <div class="reservations-list">
         <div class="reservation-item" *ngFor="let reservation of reservations">
           <div class="reservation-details">
-            <h2>{{ reservation.type }}</h2>
-            <p>Data: {{ reservation.date | date:'mediumDate' }}</p>
-            <p>Godzina: {{ reservation.time }}</p>
-            <p>Adres: {{ reservation.address }}</p>
-            <p>Koszt: {{ reservation.cost | currency:'PLN' }}</p>
+            <h2>{{ reservation.reservationType.reservationName }}</h2>
+            <p *ngIf="reservation.reservationType.description">{{ reservation.reservationType.description }}</p>
+            <p>Tytuł nagrania: {{ reservation.recording.title }}</p>
+            <p>Data: {{ reservation.reservationDate | date:'mediumDate' }}</p>
+            <p>Godzina: {{ reservation.reservationDate | date:'shortTime' }}</p>
+            <p>Adres: Warszawa, ul. Muzyczna 1</p>
+            <p *ngIf="reservation.notes">Notatki: {{ reservation.notes }}</p>
           </div>
           <div class="reservation-actions">
             <img src="../../../../assets/images/logo.png" alt="Logo" class="reservation-logo">
-            <button mat-raised-button color="primary" class="btn-edit" (click)="editReservation(reservation.id)">Edytuj rezerwację</button>
-          </div> 
+            <div class="buttons">
+<!--              <button mat-raised-button color="primary" class="btn-edit" (click)="editReservation(reservation.id)">Edytuj rezerwację</button>-->
+              <button mat-raised-button color="primary" class="btn-recording" (click)="showRecording(reservation.recording.recordingId)">Wyświetl nagranie</button>
+              <button mat-raised-button color="primary" class="btn-delete" (click)="deleteReservation(reservation.id)">Usuń rezerwację</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

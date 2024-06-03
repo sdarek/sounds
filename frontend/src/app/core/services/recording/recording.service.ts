@@ -1,33 +1,42 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Recording } from '../../models/recording.model';
+import {RecordingRequest, RecordingResponse, RecordingsResponse} from "../../models/recording.model";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecordingService {
-  private apiUrl = 'http://localhost:8080/api/recordings';
+  private apiUrl = 'http://localhost:8080/api/v1/recordings';
 
   constructor(private http: HttpClient) {}
 
-  getAllRecordings(): Observable<Recording[]> {
-    return this.http.get<Recording[]>(this.apiUrl);
+  getUserRecordings(userId: number): Observable<RecordingsResponse[]> {
+    return this.http.get<RecordingsResponse[]>(`${this.apiUrl}/user/${userId}`);
   }
 
-  getRecordingById(id: number): Observable<Recording> {
-    return this.http.get<Recording>(`${this.apiUrl}/${id}`);
+  getOngoingRecordings(userId: number): Observable<RecordingsResponse[]> {
+    return this.http.get<RecordingsResponse[]>(`${this.apiUrl}/user/${userId}/ongoing`);
   }
 
-  createRecording(recording: Recording): Observable<Recording> {
-    return this.http.post<Recording>(this.apiUrl, recording);
+  getDoneRecordings(userId: number): Observable<RecordingsResponse[]> {
+    return this.http.get<RecordingsResponse[]>(`${this.apiUrl}/user/${userId}/done`);
   }
 
-  updateRecording(id: number, recording: Recording): Observable<Recording> {
-    return this.http.put<Recording>(`${this.apiUrl}/${id}`, recording);
+  createRecording(userId: number, recordingData: RecordingRequest): Observable<RecordingsResponse> {
+    return this.http.post<RecordingsResponse>(`${this.apiUrl}/${userId}`, recordingData);
   }
 
-  deleteRecording(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  getRecordingById(id: number): Observable<RecordingResponse> {
+    return this.http.get<RecordingResponse>(`${this.apiUrl}/${id}`)
+  }
+
+  updateRecording(recordingId: number, recordingData: RecordingRequest): Observable<RecordingRequest> {
+    return this.http.put<RecordingRequest>(`${this.apiUrl}/${recordingId}`, recordingData);
+  }
+
+  deleteRecording(recordingId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${recordingId}`);
   }
 }

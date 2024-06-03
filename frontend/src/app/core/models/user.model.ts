@@ -8,3 +8,10 @@ export interface User {
   role: string;
   createdAt?: string;
 }
+
+export interface UserResponse {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+}

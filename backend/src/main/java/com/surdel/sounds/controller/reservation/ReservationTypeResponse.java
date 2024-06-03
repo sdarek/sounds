@@ -1,4 +1,4 @@
-package com.surdel.sounds.controller;
+package com.surdel.sounds.controller.reservation;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
-    private String email;
-    private String password;
+public class ReservationTypeResponse {
+    private String reservationName;
+    private String description;
 }

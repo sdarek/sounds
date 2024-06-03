@@ -12,3 +12,23 @@ export interface Reservation {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface ReservationRequest {
+  id?: number;
+  note: string;
+  reservationDate: string;
+}
+
+export interface ReservationResponse {
+  id: number;
+  reservationType: {
+    reservationName: string;
+    description: string;
+  };
+  recording: {
+    recordingId: number;
+    title: string;
+  };
+  reservationDate: string;
+  notes: string;
+}

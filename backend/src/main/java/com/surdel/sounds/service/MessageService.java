@@ -1,35 +1,41 @@
 package com.surdel.sounds.service;
 
+import com.surdel.sounds.controller.auth.UserResponse;
+import com.surdel.sounds.controller.message.MessageRequest;
+import com.surdel.sounds.controller.message.MessageResponse;
 import com.surdel.sounds.model.Message;
 import com.surdel.sounds.repository.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.surdel.sounds.repository.RecordingRepository;
+import com.surdel.sounds.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 @Service
+@RequiredArgsConstructor
 public class MessageService {
 
-    @Autowired
-    private MessageRepository messageRepository;
+    private final MessageRepository messageRepository;
+    private final RecordingRepository recordingRepository;
+    private final UserRepository userRepository;
 
-    public List<Message> getAllMessages() {
-        return messageRepository.findAll();
-    }
+    public void createMessage(MessageRequest message) {
+        var recording = recordingRepository.findById(message.getRecordingId())
+                .orElseThrow(() -> new RuntimeException("Recording not found"));
+        var user = userRepository.findById(message.getSenderId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-    public Message getMessageById(Integer id) {
-        return messageRepository.findById(id).orElse(null);
-    }
-
-    public Message createMessage(Message message) {
-        return messageRepository.save(message);
-    }
-
-    public Message updateMessage(Message message) {
-        return messageRepository.save(message);
-    }
-
-    public void deleteMessage(Integer id) {
-        messageRepository.deleteById(id);
+        var newMessage = Message.builder()
+                .recording(recording)
+                .sender(user)
+                .messageText(message.getMessageText())
+                .filePath(message.getFilePath())
+                .fileType(message.getFileType())
+                .isFinalVersion(message.getIsFinalVersion())
+                .sentAt(Timestamp.from(Instant.now()))
+                .build();
+        messageRepository.save(newMessage);
     }
 }

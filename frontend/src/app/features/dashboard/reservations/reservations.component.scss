@@ -8,12 +8,13 @@
       justify-content: center;
       align-items: center;
       width: 100%;
-      
 
-      .btn-reserve, .btn-edit {
+      .btn-reserve, .btn-edit, .btn-delete, .btn-recording {
         margin: 30px 0;
-        width: 200px;
+        //width: 200px;
         height: 60px;
+        width: 100%;
+
         background-color: $third-color;
         color: white;
         border: none;
@@ -67,9 +68,19 @@
               margin-right: 40px;
             }
 
-            .btn-edit {
-              height: 50px;
-              font-size: 14px;
+            .buttons {
+              .btn-edit, .btn-delete, .btn-recording {
+                height: 50px;
+                font-size: 14px;
+              }
+
+              .btn-delete {
+                background-color: $warning-color;
+              }
+
+              .btn-recordig {
+                background-color: $third-color;
+              }
             }
           }
         }

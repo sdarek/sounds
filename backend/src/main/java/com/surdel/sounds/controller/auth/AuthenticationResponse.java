@@ -1,4 +1,4 @@
-package com.surdel.sounds.controller;
+package com.surdel.sounds.controller.auth;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +15,5 @@ public class AuthenticationResponse {
 
     @JsonProperty("access_token")
     private String accessToken;
-
-    private String email;
-    private String role;
+    private UserResponse user;
 }

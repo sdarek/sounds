@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../core/services/auth/auth.service'
-import {RegisterRequest} from "../../core/models/register-request.model";
+import { RegisterRequest } from "../../core/models/auth.model";
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',

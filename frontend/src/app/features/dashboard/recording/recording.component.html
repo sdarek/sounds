@@ -1,0 +1,59 @@
+<div class="recording-page page">
+  <div class="container">
+    <h2 class="header">{{ recording?.title }}</h2>
+    <div class="costam">
+      <div class="recording-info">
+        <p *ngIf="recording?.description"><strong>Opis:</strong> {{ recording?.description }}</p>
+        <p><strong>Data rozpoczęcia:</strong> {{ recording?.createdAt | date:'medium' }}</p>
+        <p><strong>Status:</strong>
+          <span *ngIf="recording?.status === 'ongoing'">W trakcie</span>
+          <span *ngIf="recording?.status === 'done'">Zakończono</span>
+        </p>
+      </div>
+
+      <div class="messages-section">
+        <div class="working-messages" >
+          <h3>Wiadomości robocze</h3>
+          <ul #workingMessagesContainer>
+            <li *ngFor="let message of workingMessages" [ngClass]="{'sent-message': isSender(message.sender)}">
+              <p><strong>{{ message.sender.firstName }} {{ message.sender.lastName }}</strong>, {{ message.sentAt | date:'medium' }}</p>
+              <p>{{ message.messageText }}</p>
+              <div *ngIf="message.filePath">
+                <button (click)="downloadFile(message.filePath)">Pobierz załącznik</button>
+              </div>
+            </li>
+          </ul>
+          <div class="message-input">
+            <div class="file-input-container">
+              <span class="custom-file-input" (click)="workingFileInput.click()">Załącz plik</span>
+              <input type="file" #workingFileInput (change)="onFileSelected($event)">
+            </div>
+            <textarea placeholder="Napisz wiadomość..." [(ngModel)]="newWorkingMessage"></textarea>
+            <button (click)="sendWorkingMessage()">Wyślij</button>
+          </div>
+        </div>
+
+        <div class="final-messages">
+          <h3>Wiadomości końcowe</h3>
+          <ul #finalMessagesContainer>
+            <li *ngFor="let message of finalMessages" [ngClass]="{'sent-message': isSender(message.sender)}">
+              <p><strong>{{ message.sender.firstName }} {{ message.sender.lastName }}</strong>, {{ message.sentAt | date:'medium' }}</p>
+              <p>{{ message.messageText }}</p>
+              <div *ngIf="message.filePath">
+                <button (click)="downloadFile(message.filePath)">Pobierz załącznik</button>
+              </div>
+            </li>
+          </ul>
+          <div class="message-input">
+            <div class="file-input-container">
+              <span class="custom-file-input" (click)="finalFileInput.click()">Dodaj Plik</span>
+              <input type="file" #finalFileInput (change)="onFileSelected($event)">
+            </div>
+            <textarea placeholder="Napisz wiadomość..." [(ngModel)]="newFinalMessage"></textarea>
+            <button (click)="sendFinalMessage()">Wyślij</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
